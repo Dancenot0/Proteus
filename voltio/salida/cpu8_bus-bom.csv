@@ -1,0 +1,10 @@
+Cantidad,Componente,Descripción,Encapsulado,Categoría,Referencias,Propiedades
+1,74LS04,Séxtuple inversor (NOT),DIP,74xx,U_INV,
+1,74LS245,"Transceptor de bus octal tri-estado, bidireccional",DIP,74xx,U_245,
+1,74LS273,Registro de 8 flip-flops D con reset (clock ascendente),DIP,74xx,U_PORT,
+1,74LS48,"Decodificador BCD a 7 segmentos, salidas activas altas",DIP,74xx,U_DEC,
+1,CPU8,CPU de 8 bits educativa (conjunto de instrucciones configurable),DIP,cpu,U_CPU,
+1,7SEG-CC,"Display de 7 segmentos, cátodo común",DIP,displays,DISP1,COLOR=ROJO
+1,CLOCK,Generador de reloj digital,DIP,fuentes,CLK1,FREQ=500
+1,GND,Tierra (0 V),DIP,fuentes,GND1,
+1,6264,RAM estática 8K × 8 bits (64 kbit),DIP,memoria,U_RAM,

@@ -1,0 +1,32 @@
+* NAND de 2 entradas con indicadores
+* Generado por Voltio desde compuerta_nand
+*
+* --- Alimentación ---
+V_VCC VCC 0 DC 5
+
+* --- Componentes ---
+V_S1 A 0 DC 0
+V_S2 B 0 DC 0
+XU1 A B Y nand2
+RR1 Y LED_A 330
+D_D1 LED_A 0 DLED
+* P1 PROBE — sin modelo SPICE (Sonda de tensión (muestra el nivel en el esquemático))
+*   pines: Y
+
+* --- Modelos ---
+.subckt DLED A K
+* LED ideal: conduce por encima de 1.8 V
+D1 A K DLED1N
+.ends DLED
+.model DLED1N D(Is=1e-14 Rs=20 N=1.8 Cjo=30p Vj=0.7 M=0.5 Iave=20m Vpk=5)
+
+* --- Avisos del exportador ---
+* ! P1 (PROBE): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+
+* --- Análisis ---
+.tran 5e-10 1e-06 UIC
+.control
+run
+* plot all
+.endc
+.end

@@ -1,0 +1,38 @@
+RONDA 11 — LA PREGUNTA DEL MILLÓN: ¿GEOMETRÍA O HANDLES?  (1 solo archivo)
+=========================================================================
+Lo que nos dijeron tus R10 (gracias, oro puro):
+  R10a  impecable          => mi empaquetado/zip no toca nada: línea base sana.
+  R10b  abre y simula, con
+        los cables en abanico
+        al origen          => los PUNTOS de cable de sección 2 SON el dibujo
+                              (coordenadas absolutas, espacio = comp*254).
+                              Que haya simulado aunque todo quedó cortocircuitado
+                              en el origen sugiere que la CONEXIÓN eléctrica no
+                              vive en los puntos sino en "handles" guardados...
+                              ...pero eso es exactamente lo que esta ronda pone
+                              a prueba, porque de eso depende todo el escritor.
+  R10c  SEH KERNELBASE     => los 28 marcadores de sección 1 son OBLIGATORIOS:
+                              carry la identidad (refs). Mi escritor tendrá que
+                              emitirlos siempre, nunca omitirlos.
+
+El archivo (doble clic, como siempre):
+  R11_geometria.pdsprj   = TU Compuertas NAND intacto con UN solo punto de UN
+                           cable movido (4 bytes): el tramo que entraba al pin 2
+                           de U3:A ahora termina encima del pin 12 de U1:D,
+                           donde ya muere otro cable. Nada más toca el archivo.
+
+Qué mirar:
+  1) Dibujo: debe verse el tramo "volando" desde la zona de U3:A hasta el
+     pin 12 de U1:D, y el pin 2 de U3:A quedándose sin su cable.
+  2) Simulación con S=1, V=1, R=0, D=0:
+       * si ves CONTENCION (rojo / X / parpadeo) en el pin 12 de U1:D o en el
+         tramo movido  =>  CONECTIVIDAD GEOMETRICA (dos salidas pisándose).
+       * si simula exactamente como siempre, sin contención  =>  CONECTIVIDAD
+         POR HANDLES (los puntos solo dibujan; los handles conectan).
+
+Por qué importa: si es geometría, mi escritor emite cables con solo puntos y
+ya casi tenemos el .pdsprj sintetizado. Si son handles, hay que descifrar la
+cabecera de handle del registro de cable (ya sé dónde vive: los u32 al final
+de cada objeto coinciden con los u32 al inicio de cada cable).
+
+Cuéntame las dos cosas (dibujo y simulación) y con eso elijo el camino.

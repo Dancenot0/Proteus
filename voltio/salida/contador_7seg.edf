@@ -1,0 +1,287 @@
+(edif contador_7seg
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written (timeStamp 2026 10 10 23 12 23)
+      (author "Voltio") (program "Voltio") (version "0.1")))
+  (library VOLTIOLIB
+    (edifLevel 0)
+    (technology (numberDefinition))
+    (cell C_74LS193
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port CPD (direction INPUT))
+          (port CPU (direction INPUT))
+          (port N_MR (direction INPUT))
+          (port N_PL (direction INPUT))
+          (port N_TCD (direction OUTPUT))
+          (port N_TCU (direction OUTPUT))
+          (port P_0 (direction INPUT))
+          (port P_1 (direction INPUT))
+          (port P_2 (direction INPUT))
+          (port P_3 (direction INPUT))
+          (port Q_0 (direction OUTPUT))
+          (port Q_1 (direction OUTPUT))
+          (port Q_2 (direction OUTPUT))
+          (port Q_3 (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_74LS48
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A_0 (direction INPUT))
+          (port A_1 (direction INPUT))
+          (port A_2 (direction INPUT))
+          (port A_3 (direction INPUT))
+          (port N_BI (direction INPUT))
+          (port N_LT (direction INPUT))
+          (port N_RBI (direction INPUT))
+          (port a_0 (direction OUTPUT))
+          (port a_1 (direction OUTPUT))
+          (port a_2 (direction OUTPUT))
+          (port a_3 (direction OUTPUT))
+          (port a_4 (direction OUTPUT))
+          (port a_5 (direction OUTPUT))
+          (port a_6 (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_7SEG_CC
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port CC (direction INPUT))
+          (port a_0 (direction INPUT))
+          (port a_1 (direction INPUT))
+          (port a_2 (direction INPUT))
+          (port a_3 (direction INPUT))
+          (port a_4 (direction INPUT))
+          (port a_5 (direction INPUT))
+          (port a_6 (direction INPUT))
+          (port dp (direction INPUT))
+        )
+      )
+    )
+    (cell C_CLOCK
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port Q (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_GND
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port P (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_VCC
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port P (direction OUTPUT))
+        )
+      )
+    )
+  )
+  (design contador_7seg
+    (cellRef TOPCELL (libraryRef VOLTIOLIB))
+    (view NETLIST
+      (viewType NETLIST)
+      (interface
+        (port CTRL_CNT (direction INOUT))
+        (port CTRL_DEC (direction INOUT))
+        (port GND (direction INOUT))
+        (port P_BUS_0 (direction INOUT))
+        (port P_BUS_1 (direction INOUT))
+        (port P_BUS_2 (direction INOUT))
+        (port P_BUS_3 (direction INOUT))
+        (port VCC (direction INOUT))
+      )
+      (contents
+        (instance CLK1 (viewRef NETLIST (cellRef C_CLOCK (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            DUTY=50
+            FREQ=1000
+          "))
+        )
+        (instance U1 (viewRef NETLIST (cellRef C_74LS193 (libraryRef VOLTIOLIB)))
+        )
+        (instance U2 (viewRef NETLIST (cellRef C_74LS48 (libraryRef VOLTIOLIB)))
+        )
+        (instance DISP1 (viewRef NETLIST (cellRef C_7SEG_CC (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            COLOR=ROJO
+          "))
+        )
+        (instance GND1 (viewRef NETLIST (cellRef C_GND (libraryRef VOLTIOLIB)))
+        )
+        (instance VCC1 (viewRef NETLIST (cellRef C_VCC (libraryRef VOLTIOLIB)))
+        )
+        (net CLK
+          (joined
+            (portRef Q (instanceRef CLK1))
+            (portRef CPU (instanceRef U1))
+          )
+        )
+        (net Q_0
+          (joined
+            (portRef Q_0 (instanceRef U1))
+            (portRef A_0 (instanceRef U2))
+          )
+          (property BUS (string "Q"))
+          (property BIT (string "0"))
+        )
+        (net Q_1
+          (joined
+            (portRef Q_1 (instanceRef U1))
+            (portRef A_1 (instanceRef U2))
+          )
+          (property BUS (string "Q"))
+          (property BIT (string "1"))
+        )
+        (net Q_2
+          (joined
+            (portRef Q_2 (instanceRef U1))
+            (portRef A_2 (instanceRef U2))
+          )
+          (property BUS (string "Q"))
+          (property BIT (string "2"))
+        )
+        (net Q_3
+          (joined
+            (portRef Q_3 (instanceRef U1))
+            (portRef A_3 (instanceRef U2))
+          )
+          (property BUS (string "Q"))
+          (property BIT (string "3"))
+        )
+        (net SEG_0
+          (joined
+            (portRef a_0 (instanceRef U2))
+            (portRef a_0 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "0"))
+        )
+        (net SEG_1
+          (joined
+            (portRef a_1 (instanceRef U2))
+            (portRef a_1 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "1"))
+        )
+        (net SEG_2
+          (joined
+            (portRef a_2 (instanceRef U2))
+            (portRef a_2 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "2"))
+        )
+        (net SEG_3
+          (joined
+            (portRef a_3 (instanceRef U2))
+            (portRef a_3 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "3"))
+        )
+        (net SEG_4
+          (joined
+            (portRef a_4 (instanceRef U2))
+            (portRef a_4 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "4"))
+        )
+        (net SEG_5
+          (joined
+            (portRef a_5 (instanceRef U2))
+            (portRef a_5 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "5"))
+        )
+        (net SEG_6
+          (joined
+            (portRef a_6 (instanceRef U2))
+            (portRef a_6 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "6"))
+        )
+        (net CTRL_CNT
+          (joined
+            (portRef CTRL_CNT)
+            (portRef N_MR (instanceRef U1))
+            (portRef CPD (instanceRef U1))
+            (portRef N_PL (instanceRef U1))
+          )
+        )
+        (net P_BUS_0
+          (joined
+            (portRef P_BUS_0)
+            (portRef P_0 (instanceRef U1))
+          )
+          (property BUS (string "P_BUS"))
+          (property BIT (string "0"))
+        )
+        (net P_BUS_1
+          (joined
+            (portRef P_BUS_1)
+            (portRef P_1 (instanceRef U1))
+          )
+          (property BUS (string "P_BUS"))
+          (property BIT (string "1"))
+        )
+        (net P_BUS_2
+          (joined
+            (portRef P_BUS_2)
+            (portRef P_2 (instanceRef U1))
+          )
+          (property BUS (string "P_BUS"))
+          (property BIT (string "2"))
+        )
+        (net P_BUS_3
+          (joined
+            (portRef P_BUS_3)
+            (portRef P_3 (instanceRef U1))
+          )
+          (property BUS (string "P_BUS"))
+          (property BIT (string "3"))
+        )
+        (net CTRL_DEC
+          (joined
+            (portRef CTRL_DEC)
+            (portRef N_LT (instanceRef U2))
+            (portRef N_RBI (instanceRef U2))
+            (portRef N_BI (instanceRef U2))
+          )
+        )
+        (net VCC
+          (joined
+            (portRef VCC)
+            (portRef P (instanceRef VCC1))
+          )
+        )
+        (net GND
+          (joined
+            (portRef GND)
+            (portRef P (instanceRef GND1))
+            (portRef CC (instanceRef DISP1))
+            (portRef dp (instanceRef DISP1))
+          )
+        )
+      )
+    )
+  )
+)

@@ -1,0 +1,391 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1068" height="666" viewBox="0 0 1068 666" font-family="ui-sans-serif, system-ui, sans-serif">
+<style>
+  .grid       { fill: #d8dce2; }
+  .body       { fill: #ffffff; stroke: #23272e; stroke-width: 1.6; }
+  .wire-only  { fill: none; stroke: #23272e; stroke-width: 1.6; }
+  .wire       { fill: none; stroke: #4a4f57; stroke-width: 1.6; stroke-linejoin: round; }
+  .busband    { fill: none; stroke: #23272e; stroke-width: 4.5; stroke-linejoin: round; }
+  .bus-slash  { stroke: #23272e; stroke-width: 1.6; }
+  .junction   { fill: #23272e; }
+  .contact    { fill: #ffffff; stroke: #23272e; stroke-width: 1.4; }
+  .emit       { fill: none; stroke: #d21b1b; stroke-width: 1.2; }
+  .seg        { stroke: #c9ced6; stroke-width: 5; stroke-linecap: round; fill: none; }
+  .seg-on     { stroke: #ff2d2d; stroke-width: 5; stroke-linecap: round; fill: none; }
+  .lcd-screen { fill: #b9d7a8; stroke: #23272e; stroke-width: 1.2; }
+  .lcd-text   { font: 600 9px ui-monospace, Menlo, Consolas, monospace; fill: #16210f; }
+  .led-glow   { fill: #ff3b30; opacity: 0.35; }
+  .refdes     { font: 700 11px ui-sans-serif, system-ui, sans-serif; fill: #23272e;
+                text-anchor: middle; }
+  .devname    { font: 10px ui-sans-serif, system-ui, sans-serif; fill: #565c66;
+                text-anchor: middle; }
+  .pinname    { font: 8.5px ui-monospace, Menlo, Consolas, monospace; fill: #6b7280; }
+  .net-label  { font: 9.5px ui-monospace, Menlo, Consolas, monospace; fill: #2f6fb3;
+                text-anchor: middle; stroke: #fbfbfd; stroke-width: 3px;
+                paint-order: stroke; }
+  .state-text { font: 700 12px ui-monospace, Menlo, Consolas, monospace; fill: #23272e;
+                text-anchor: middle; }
+  .probe-text { font: 700 11px ui-monospace, Menlo, Consolas, monospace; fill: #0a8f2c;
+                text-anchor: middle; }
+  .live-value { font: 9px ui-monospace, Menlo, Consolas, monospace; fill: #7a4bd1;
+                text-anchor: middle; }
+  .symbol-letter { font: 700 12px ui-sans-serif, system-ui, sans-serif; fill: #23272e;
+                   text-anchor: middle; }
+  .tie-box    { fill: #fff6d6; stroke: #b58900; stroke-width: 1.2; }
+  .tie-text   { font: 700 11px ui-monospace, Menlo, Consolas, monospace; fill: #7a5c00;
+                text-anchor: middle; }
+  .rail .wire { stroke: #23272e; }
+  .legend-text{ font: 10px ui-sans-serif, system-ui, sans-serif; fill: #43484f; }
+  .frame      { stroke: #b6bcc6; stroke-width: 1; }
+  .tb-title   { font: 700 14px ui-sans-serif, system-ui, sans-serif; fill: #1b1f26; }
+  .tb-sub     { font: 10px ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+  svg         { background: #fbfbfd; }
+</style>
+<rect width="1068" height="666" fill="#fbfbfd"/>
+<g transform="translate(52.0,52.0)">
+<defs><pattern id="g5826f08" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10.0" cy="10.0" r="0.8" class="grid"/></pattern></defs><rect x="-52" y="-52" width="1068" height="564" fill="url(#g5826f08)"/>
+<g class="wires">
+<polyline points="312.0,42.2 336.0,42.2 336.0,224.0 144.0,224.0 144.0,325.2 168.0,325.2" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="312.0,43.1 343.0,43.1 343.0,230.7 137.0,230.7 137.0,327.7 168.0,327.7" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,43.9 350.0,43.9 350.0,237.3 130.0,237.3 130.0,330.2 168.0,330.2" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,44.8 357.0,44.8 357.0,244.0 123.0,244.0 123.0,332.6 168.0,332.6" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="312.0,45.7 364.0,45.7 364.0,250.7 116.0,250.7 116.0,335.1 168.0,335.1" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,46.6 371.0,46.6 371.0,257.3 109.0,257.3 109.0,337.5 168.0,337.5" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,47.4 336.0,47.4 336.0,264.0 144.0,264.0 144.0,340.0 168.0,340.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,48.3 343.0,48.3 343.0,270.7 137.0,270.7 137.0,342.5 168.0,342.5" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,49.2 350.0,49.2 350.0,277.3 130.0,277.3 130.0,344.9 168.0,344.9" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,50.1 357.0,50.1 357.0,284.0 123.0,284.0 123.0,347.4 168.0,347.4" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,50.9 364.0,50.9 364.0,290.7 116.0,290.7 116.0,349.8 168.0,349.8" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,51.8 371.0,51.8 371.0,297.3 109.0,297.3 109.0,352.3 168.0,352.3" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="312.0,52.7 336.0,52.7 336.0,304.0 144.0,304.0 144.0,354.8 168.0,354.8" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="422.0,391.7 422.0,415.0" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,391.7 422.0,391.7" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,395.0 422.0,395.0" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,398.3 422.0,398.3" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,401.7 422.0,401.7" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,405.0 422.0,405.0" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,408.3 422.0,408.3" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,411.7 422.0,411.7" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<polyline points="448.0,415.0 422.0,415.0" class="wire" stroke="#4a4f57" stroke-width="1.6"/>
+<g class="rail"><line x1="422.0" y1="403.3" x2="400.0" y2="403.3" class="wire"/><rect x="393.0" y="394.3" width="14" height="18" rx="2" class="tie-box"/><text x="400.0" y="407.3" class="tie-text">0</text></g>
+<polyline points="412.0,60.1 412.0,72.4" class="busband"/>
+<polyline points="412.0,72.4 300.0,72.4" class="busband"/>
+<polyline points="300.0,338.0 300.0,422.0" class="busband"/>
+<polyline points="300.0,338.0 300.0,422.0" class="busband"/>
+<polyline points="300.0,338.0 420.0,338.0" class="busband"/>
+<polyline points="420.0,135.0 420.0,111.7" class="busband"/>
+<line x1="312.0" y1="60.1" x2="412.0" y2="60.1" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="61.9" x2="412.0" y2="61.9" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="63.6" x2="412.0" y2="63.6" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="65.4" x2="412.0" y2="65.4" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="67.1" x2="412.0" y2="67.1" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="68.9" x2="412.0" y2="68.9" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="70.6" x2="412.0" y2="70.6" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="312.0" y1="72.4" x2="412.0" y2="72.4" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="338.0" x2="300.0" y2="338.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="350.0" x2="300.0" y2="350.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="362.0" x2="300.0" y2="362.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="374.0" x2="300.0" y2="374.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="386.0" x2="300.0" y2="386.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="398.0" x2="300.0" y2="398.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="410.0" x2="300.0" y2="410.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="272.0" y1="422.0" x2="300.0" y2="422.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="111.7" x2="420.0" y2="111.7" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="115.0" x2="420.0" y2="115.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="118.3" x2="420.0" y2="118.3" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="121.7" x2="420.0" y2="121.7" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="125.0" x2="420.0" y2="125.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="128.3" x2="420.0" y2="128.3" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="131.7" x2="420.0" y2="131.7" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="448.0" y1="135.0" x2="420.0" y2="135.0" class="wire" stroke="#8a9099" stroke-width="0.9"/>
+<line x1="415.0" y1="68.1" x2="425.0" y2="58.1" class="bus-slash"/>
+<polyline points="772.0,51.0 798.0,51.0 798.0,26.3 868.0,26.3" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="772.0,59.0 805.3,59.0 805.3,30.9 868.0,30.9" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="772.0,67.0 812.7,67.0 812.7,35.4 868.0,35.4" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="772.0,75.0 820.0,75.0 820.0,40.0 868.0,40.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="772.0,83.0 827.3,83.0 827.3,44.6 868.0,44.6" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="772.0,91.0 834.7,91.0 834.7,49.1 868.0,49.1" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="772.0,99.0 842.0,99.0 842.0,53.7 868.0,53.7" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="62.0,70.0 168.0,70.0 168.0,75.0" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<g class="rail"><line x1="168.0" y1="145.0" x2="146.0" y2="145.0" class="wire"/><rect x="139.0" y="136.0" width="14" height="18" rx="2" class="tie-box"/><text x="146.0" y="149.0" class="tie-text">1</text></g>
+<polyline points="312.0,101.2 28.0,101.2 28.0,235.0" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="92.0,235.0 168.0,235.0 168.0,380.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<g class="rail"><line x1="168.0" y1="420.0" x2="146.0" y2="420.0" class="wire"/><rect x="139.0" y="411.0" width="14" height="18" rx="2" class="tie-box"/><text x="146.0" y="424.0" class="tie-text">1</text></g>
+<g class="rail"><line x1="448.0" y1="336.7" x2="426.0" y2="336.7" class="wire"/><rect x="419.0" y="327.7" width="14" height="18" rx="2" class="tie-box"/><text x="426.0" y="340.7" class="tie-text">1</text></g>
+<g class="rail"><line x1="448.0" y1="370.0" x2="426.0" y2="370.0" class="wire"/><rect x="419.0" y="361.0" width="14" height="18" rx="2" class="tie-box"/><text x="426.0" y="374.0" class="tie-text">0</text></g>
+<g class="rail"><line x1="448.0" y1="56.7" x2="426.0" y2="56.7" class="wire"/><rect x="419.0" y="47.7" width="14" height="18" rx="2" class="tie-box"/><text x="426.0" y="60.7" class="tie-text">1</text></g>
+<polyline points="312.0,171.2 448.0,171.2 448.0,90.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="542.0,55.0 688.0,55.0 688.0,43.5" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="542.0,65.0 688.0,65.0 688.0,47.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="542.0,75.0 688.0,75.0 688.0,50.5" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="542.0,85.0 688.0,85.0 688.0,54.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="688.0,66.2 688.0,101.2" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="688.0,66.2 688.0,66.2" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="688.0,83.8 688.0,83.8" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="688.0,101.2 688.0,101.2" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<g class="rail"><line x1="688.0" y1="66.2" x2="666.0" y2="66.2" class="wire"/><rect x="659.0" y="57.2" width="14" height="18" rx="2" class="tie-box"/><text x="666.0" y="70.2" class="tie-text">1</text></g>
+<polyline points="910.0,232.0 932.0,232.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="932.0,352.0 932.0,232.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="910.0,112.0 910.0,232.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="868.0,232.0 932.0,232.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="868.0,232.0 868.0,80.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<circle cx="422.0" cy="391.7" r="2.6" class="junction"/>
+<circle cx="422.0" cy="395.0" r="2.6" class="junction"/>
+<circle cx="422.0" cy="398.3" r="2.6" class="junction"/>
+<circle cx="422.0" cy="401.7" r="2.6" class="junction"/>
+<circle cx="422.0" cy="405.0" r="2.6" class="junction"/>
+<circle cx="422.0" cy="408.3" r="2.6" class="junction"/>
+<circle cx="422.0" cy="411.7" r="2.6" class="junction"/>
+<circle cx="422.0" cy="415.0" r="2.6" class="junction"/>
+<circle cx="688.0" cy="83.8" r="2.6" class="junction"/>
+<circle cx="868.0" cy="232.0" r="2.6" class="junction"/>
+<circle cx="910.0" cy="232.0" r="2.6" class="junction"/>
+<circle cx="932.0" cy="232.0" r="2.6" class="junction"/>
+</g>
+<g class="net-labels">
+<text x="372.0" y="264.0" class="net-label" text-anchor="start">ABUS[0:12]</text>
+<text x="422.0" y="379.7" class="net-label" text-anchor="end">A245[0:7]</text>
+<text x="420.0" y="54.1" class="net-label" text-anchor="start">DBUS[0:7]</text>
+<text x="542.0" y="334.0" class="net-label" text-anchor="start">DBUS_B[0:7]</text>
+<text x="542.0" y="83.0" class="net-label" text-anchor="start">PORT_HI[0:3]</text>
+<text x="820.0" y="14.3" class="net-label" text-anchor="middle">SEG[0:6]</text>
+<text x="448.0" y="359.0" class="net-label">BUS_DIR</text>
+<text x="448.0" y="325.7" class="net-label">BUS_EN</text>
+<text x="106.5" y="67.5" class="net-label">CLK</text>
+<text x="688.0" y="55.2" class="net-label">DEC_CTRL</text>
+<text x="903.3" y="69.0" class="net-label">GND</text>
+<text x="603.3" y="44.2" class="net-label">PORT0</text>
+<text x="603.3" y="62.0" class="net-label">PORT1</text>
+<text x="603.3" y="24.8" class="net-label">PORT2</text>
+<text x="603.3" y="97.5" class="net-label">PORT3</text>
+<text x="448.0" y="67.7" class="net-label">PORT_MR</text>
+<text x="369.1" y="125.6" class="net-label">PORT_STROBE</text>
+<text x="123.9" y="302.5" class="net-label">RAM_RD</text>
+<text x="168.0" y="409.0" class="net-label">RAM_WR</text>
+<text x="168.0" y="134.0" class="net-label">RST</text>
+<text x="192.7" y="163.1" class="net-label">WR_N</text>
+</g>
+<g class="parts">
+<g class="part" data-ref="CLK1" transform="translate(20.0,60.0)">
+<rect x="0" y="0" width="22.5" height="20.0" class="body"/>
+<path d="M3.0,15.0 L6.6,15.0 L6.6,5.0 L12.0,5.0 L12.0,15.0 L16.5,15.0" class="wire-only"/>
+<line x1="22.5" y1="10.0" x2="30.0" y2="10.0" class="wire-only"/>
+<line x1="30.0" y1="10.0" x2="42.0" y2="10.0" class="wire-only"/>
+<text x="15.0" y="-7" class="refdes">CLK1</text>
+<text x="15.0" y="33.0" class="devname">FREQ=500</text>
+</g>
+<g class="part" data-ref="U_CPU" transform="translate(180.0,40.0)">
+<rect x="0" y="0" width="120.0" height="140.0" class="body"/>
+<line x1="0.0" y1="35.0" x2="-12.0" y2="35.0" class="wire-only"/>
+<line x1="0.0" y1="105.0" x2="-12.0" y2="105.0" class="wire-only"/>
+<line x1="120.0" y1="2.2" x2="132.0" y2="2.2" class="wire-only"/>
+<line x1="120.0" y1="3.1" x2="132.0" y2="3.1" class="wire-only"/>
+<line x1="120.0" y1="3.9" x2="132.0" y2="3.9" class="wire-only"/>
+<line x1="120.0" y1="4.8" x2="132.0" y2="4.8" class="wire-only"/>
+<line x1="120.0" y1="5.7" x2="132.0" y2="5.7" class="wire-only"/>
+<line x1="120.0" y1="6.6" x2="132.0" y2="6.6" class="wire-only"/>
+<line x1="120.0" y1="7.4" x2="132.0" y2="7.4" class="wire-only"/>
+<line x1="120.0" y1="8.3" x2="132.0" y2="8.3" class="wire-only"/>
+<line x1="120.0" y1="9.2" x2="132.0" y2="9.2" class="wire-only"/>
+<line x1="120.0" y1="10.1" x2="132.0" y2="10.1" class="wire-only"/>
+<line x1="120.0" y1="10.9" x2="132.0" y2="10.9" class="wire-only"/>
+<line x1="120.0" y1="11.8" x2="132.0" y2="11.8" class="wire-only"/>
+<line x1="120.0" y1="12.7" x2="132.0" y2="12.7" class="wire-only"/>
+<line x1="120.0" y1="13.6" x2="132.0" y2="13.6" class="wire-only"/>
+<line x1="120.0" y1="14.4" x2="132.0" y2="14.4" class="wire-only"/>
+<line x1="120.0" y1="15.3" x2="132.0" y2="15.3" class="wire-only"/>
+<line x1="120.0" y1="20.1" x2="132.0" y2="20.1" class="wire-only"/>
+<line x1="120.0" y1="21.9" x2="132.0" y2="21.9" class="wire-only"/>
+<line x1="120.0" y1="23.6" x2="132.0" y2="23.6" class="wire-only"/>
+<line x1="120.0" y1="25.4" x2="132.0" y2="25.4" class="wire-only"/>
+<line x1="120.0" y1="27.1" x2="132.0" y2="27.1" class="wire-only"/>
+<line x1="120.0" y1="28.9" x2="132.0" y2="28.9" class="wire-only"/>
+<line x1="120.0" y1="30.6" x2="132.0" y2="30.6" class="wire-only"/>
+<line x1="120.0" y1="32.4" x2="132.0" y2="32.4" class="wire-only"/>
+<line x1="120.0" y1="43.8" x2="132.0" y2="43.8" class="wire-only"/>
+<line x1="120.0" y1="61.2" x2="132.0" y2="61.2" class="wire-only"/>
+<line x1="120.0" y1="78.8" x2="132.0" y2="78.8" class="wire-only"/>
+<line x1="120.0" y1="96.2" x2="132.0" y2="96.2" class="wire-only"/>
+<line x1="120.0" y1="113.8" x2="132.0" y2="113.8" class="wire-only"/>
+<line x1="120.0" y1="131.2" x2="132.0" y2="131.2" class="wire-only"/>
+<text x="60.0" y="-7" class="refdes">U_CPU</text>
+<text x="60.0" y="153.0" class="devname">CPU8</text>
+<text x="5.0" y="38.5" class="pinname" text-anchor="start">CLK</text>
+<text x="5.0" y="108.5" class="pinname" text-anchor="start">/RESET</text>
+<text x="115.0" y="11.8" class="pinname" text-anchor="end">ADDR[0:15]</text>
+<text x="115.0" y="29.2" class="pinname" text-anchor="end">DATA[0:7]</text>
+<text x="115.0" y="47.2" class="pinname" text-anchor="end">/RD</text>
+<text x="115.0" y="64.8" class="pinname" text-anchor="end">/WR</text>
+<text x="115.0" y="82.2" class="pinname" text-anchor="end">/MREQ</text>
+<text x="115.0" y="99.8" class="pinname" text-anchor="end">/IOREQ</text>
+<text x="115.0" y="117.2" class="pinname" text-anchor="end">HALT</text>
+<text x="115.0" y="134.8" class="pinname" text-anchor="end">WSTROBE</text>
+<text x="60.0" y="165.0" class="live-value">PC=0009 A=21 B=00 -- HLT</text>
+</g>
+<g class="part" data-ref="U_RAM" transform="translate(180.0,320.0)">
+<rect x="0" y="0" width="80.0" height="120.0" class="body"/>
+<line x1="0.0" y1="5.2" x2="-12.0" y2="5.2" class="wire-only"/>
+<line x1="0.0" y1="7.7" x2="-12.0" y2="7.7" class="wire-only"/>
+<line x1="0.0" y1="10.2" x2="-12.0" y2="10.2" class="wire-only"/>
+<line x1="0.0" y1="12.6" x2="-12.0" y2="12.6" class="wire-only"/>
+<line x1="0.0" y1="15.1" x2="-12.0" y2="15.1" class="wire-only"/>
+<line x1="0.0" y1="17.5" x2="-12.0" y2="17.5" class="wire-only"/>
+<line x1="0.0" y1="20.0" x2="-12.0" y2="20.0" class="wire-only"/>
+<line x1="0.0" y1="22.5" x2="-12.0" y2="22.5" class="wire-only"/>
+<line x1="0.0" y1="24.9" x2="-12.0" y2="24.9" class="wire-only"/>
+<line x1="0.0" y1="27.4" x2="-12.0" y2="27.4" class="wire-only"/>
+<line x1="0.0" y1="29.8" x2="-12.0" y2="29.8" class="wire-only"/>
+<line x1="0.0" y1="32.3" x2="-12.0" y2="32.3" class="wire-only"/>
+<line x1="0.0" y1="34.8" x2="-12.0" y2="34.8" class="wire-only"/>
+<line x1="80.0" y1="18.0" x2="92.0" y2="18.0" class="wire-only"/>
+<line x1="80.0" y1="30.0" x2="92.0" y2="30.0" class="wire-only"/>
+<line x1="80.0" y1="42.0" x2="92.0" y2="42.0" class="wire-only"/>
+<line x1="80.0" y1="54.0" x2="92.0" y2="54.0" class="wire-only"/>
+<line x1="80.0" y1="66.0" x2="92.0" y2="66.0" class="wire-only"/>
+<line x1="80.0" y1="78.0" x2="92.0" y2="78.0" class="wire-only"/>
+<line x1="80.0" y1="90.0" x2="92.0" y2="90.0" class="wire-only"/>
+<line x1="80.0" y1="102.0" x2="92.0" y2="102.0" class="wire-only"/>
+<line x1="0.0" y1="60.0" x2="-12.0" y2="60.0" class="wire-only"/>
+<line x1="0.0" y1="100.0" x2="-12.0" y2="100.0" class="wire-only"/>
+<text x="40.0" y="-7" class="refdes">U_RAM</text>
+<text x="40.0" y="133.0" class="devname">6264</text>
+<text x="5.0" y="23.0" class="pinname" text-anchor="start">A[0:12]</text>
+<text x="75.0" y="63.0" class="pinname" text-anchor="end">D[0:7]</text>
+<text x="5.0" y="63.5" class="pinname" text-anchor="start">/E</text>
+<text x="5.0" y="103.5" class="pinname" text-anchor="start">/W</text>
+</g>
+<g class="part" data-ref="U_INV" transform="translate(40.0,220.0)">
+<path d="M0,0 L30.0,15.0 L0,30.0 Z" class="body"/>
+<circle cx="33.5" cy="15.0" r="3.5" class="wire-only"/>
+<line x1="0.0" y1="15.0" x2="-12.0" y2="15.0" class="wire-only"/>
+<line x1="40.0" y1="15.0" x2="52.0" y2="15.0" class="wire-only"/>
+<text x="20.0" y="-7" class="refdes">U_INV</text>
+<text x="20.0" y="43.0" class="devname">74LS04</text>
+</g>
+<g class="part" data-ref="U_245" transform="translate(460.0,320.0)">
+<rect x="0" y="0" width="70.0" height="100.0" class="body"/>
+<line x1="0.0" y1="16.7" x2="-12.0" y2="16.7" class="wire-only"/>
+<line x1="0.0" y1="50.0" x2="-12.0" y2="50.0" class="wire-only"/>
+<line x1="0.0" y1="71.7" x2="-12.0" y2="71.7" class="wire-only"/>
+<line x1="0.0" y1="75.0" x2="-12.0" y2="75.0" class="wire-only"/>
+<line x1="0.0" y1="78.3" x2="-12.0" y2="78.3" class="wire-only"/>
+<line x1="0.0" y1="81.7" x2="-12.0" y2="81.7" class="wire-only"/>
+<line x1="0.0" y1="85.0" x2="-12.0" y2="85.0" class="wire-only"/>
+<line x1="0.0" y1="88.3" x2="-12.0" y2="88.3" class="wire-only"/>
+<line x1="0.0" y1="91.7" x2="-12.0" y2="91.7" class="wire-only"/>
+<line x1="0.0" y1="95.0" x2="-12.0" y2="95.0" class="wire-only"/>
+<line x1="70.0" y1="15.0" x2="82.0" y2="15.0" class="wire-only"/>
+<line x1="70.0" y1="25.0" x2="82.0" y2="25.0" class="wire-only"/>
+<line x1="70.0" y1="35.0" x2="82.0" y2="35.0" class="wire-only"/>
+<line x1="70.0" y1="45.0" x2="82.0" y2="45.0" class="wire-only"/>
+<line x1="70.0" y1="55.0" x2="82.0" y2="55.0" class="wire-only"/>
+<line x1="70.0" y1="65.0" x2="82.0" y2="65.0" class="wire-only"/>
+<line x1="70.0" y1="75.0" x2="82.0" y2="75.0" class="wire-only"/>
+<line x1="70.0" y1="85.0" x2="82.0" y2="85.0" class="wire-only"/>
+<text x="35.0" y="-7" class="refdes">U_245</text>
+<text x="35.0" y="113.0" class="devname">74LS245</text>
+<text x="5.0" y="20.2" class="pinname" text-anchor="start">/E</text>
+<text x="5.0" y="53.5" class="pinname" text-anchor="start">DIR</text>
+<text x="5.0" y="86.3" class="pinname" text-anchor="start">A[0:7]</text>
+<text x="65.0" y="53.0" class="pinname" text-anchor="end">B[0:7]</text>
+</g>
+<g class="part" data-ref="U_PORT" transform="translate(460.0,40.0)">
+<rect x="0" y="0" width="70.0" height="100.0" class="body"/>
+<line x1="0.0" y1="16.7" x2="-12.0" y2="16.7" class="wire-only"/>
+<line x1="0.0" y1="50.0" x2="-12.0" y2="50.0" class="wire-only"/>
+<line x1="0.0" y1="71.7" x2="-12.0" y2="71.7" class="wire-only"/>
+<line x1="0.0" y1="75.0" x2="-12.0" y2="75.0" class="wire-only"/>
+<line x1="0.0" y1="78.3" x2="-12.0" y2="78.3" class="wire-only"/>
+<line x1="0.0" y1="81.7" x2="-12.0" y2="81.7" class="wire-only"/>
+<line x1="0.0" y1="85.0" x2="-12.0" y2="85.0" class="wire-only"/>
+<line x1="0.0" y1="88.3" x2="-12.0" y2="88.3" class="wire-only"/>
+<line x1="0.0" y1="91.7" x2="-12.0" y2="91.7" class="wire-only"/>
+<line x1="0.0" y1="95.0" x2="-12.0" y2="95.0" class="wire-only"/>
+<line x1="70.0" y1="15.0" x2="82.0" y2="15.0" class="wire-only"/>
+<line x1="70.0" y1="25.0" x2="82.0" y2="25.0" class="wire-only"/>
+<line x1="70.0" y1="35.0" x2="82.0" y2="35.0" class="wire-only"/>
+<line x1="70.0" y1="45.0" x2="82.0" y2="45.0" class="wire-only"/>
+<line x1="70.0" y1="55.0" x2="82.0" y2="55.0" class="wire-only"/>
+<line x1="70.0" y1="65.0" x2="82.0" y2="65.0" class="wire-only"/>
+<line x1="70.0" y1="75.0" x2="82.0" y2="75.0" class="wire-only"/>
+<line x1="70.0" y1="85.0" x2="82.0" y2="85.0" class="wire-only"/>
+<text x="35.0" y="-7" class="refdes">U_PORT</text>
+<text x="35.0" y="113.0" class="devname">74LS273</text>
+<text x="5.0" y="20.2" class="pinname" text-anchor="start">/MR</text>
+<text x="5.0" y="53.5" class="pinname" text-anchor="start">CP</text>
+<text x="5.0" y="86.3" class="pinname" text-anchor="start">D[0:7]</text>
+<text x="65.0" y="53.0" class="pinname" text-anchor="end">Q[0:7]</text>
+<text x="35.0" y="125.0" class="live-value">21</text>
+</g>
+<g class="part" data-ref="U_DEC" transform="translate(700.0,40.0)">
+<rect x="0" y="0" width="60.0" height="70.0" class="body"/>
+<line x1="0.0" y1="3.5" x2="-12.0" y2="3.5" class="wire-only"/>
+<line x1="0.0" y1="7.0" x2="-12.0" y2="7.0" class="wire-only"/>
+<line x1="0.0" y1="10.5" x2="-12.0" y2="10.5" class="wire-only"/>
+<line x1="0.0" y1="14.0" x2="-12.0" y2="14.0" class="wire-only"/>
+<line x1="0.0" y1="26.2" x2="-12.0" y2="26.2" class="wire-only"/>
+<line x1="0.0" y1="43.8" x2="-12.0" y2="43.8" class="wire-only"/>
+<line x1="0.0" y1="61.2" x2="-12.0" y2="61.2" class="wire-only"/>
+<line x1="60.0" y1="11.0" x2="72.0" y2="11.0" class="wire-only"/>
+<line x1="60.0" y1="19.0" x2="72.0" y2="19.0" class="wire-only"/>
+<line x1="60.0" y1="27.0" x2="72.0" y2="27.0" class="wire-only"/>
+<line x1="60.0" y1="35.0" x2="72.0" y2="35.0" class="wire-only"/>
+<line x1="60.0" y1="43.0" x2="72.0" y2="43.0" class="wire-only"/>
+<line x1="60.0" y1="51.0" x2="72.0" y2="51.0" class="wire-only"/>
+<line x1="60.0" y1="59.0" x2="72.0" y2="59.0" class="wire-only"/>
+<text x="30.0" y="-7" class="refdes">U_DEC</text>
+<text x="30.0" y="83.0" class="devname">74LS48</text>
+<text x="5.0" y="11.8" class="pinname" text-anchor="start">A[0:3]</text>
+<text x="5.0" y="29.8" class="pinname" text-anchor="start">/LT</text>
+<text x="5.0" y="47.2" class="pinname" text-anchor="start">/RBI</text>
+<text x="5.0" y="64.8" class="pinname" text-anchor="start">/BI</text>
+<text x="55.0" y="38.0" class="pinname" text-anchor="end">a[0:6]</text>
+</g>
+<g class="part" data-ref="DISP1" transform="translate(880.0,20.0)">
+<rect x="0" y="0" width="60.0" height="80.0" class="body"/>
+<line data-seg="a" x1="13.2" y1="8.0" x2="46.8" y2="8.0" class="seg"/>
+<line data-seg="b" x1="48.0" y1="10.4" x2="48.0" y2="36.8" class="seg"/>
+<line data-seg="c" x1="48.0" y1="43.2" x2="48.0" y2="69.6" class="seg"/>
+<line data-seg="d" x1="13.2" y1="72.0" x2="46.8" y2="72.0" class="seg"/>
+<line data-seg="e" x1="12.0" y1="43.2" x2="12.0" y2="69.6" class="seg"/>
+<line data-seg="f" x1="12.0" y1="10.4" x2="12.0" y2="36.8" class="seg"/>
+<line data-seg="g" x1="13.2" y1="40.0" x2="46.8" y2="40.0" class="seg"/>
+<circle data-seg="dp" cx="54.0" cy="72.0" r="2.5" class="seg"/>
+<line x1="0.0" y1="6.3" x2="-12.0" y2="6.3" class="wire-only"/>
+<line x1="0.0" y1="10.9" x2="-12.0" y2="10.9" class="wire-only"/>
+<line x1="0.0" y1="15.4" x2="-12.0" y2="15.4" class="wire-only"/>
+<line x1="0.0" y1="20.0" x2="-12.0" y2="20.0" class="wire-only"/>
+<line x1="0.0" y1="24.6" x2="-12.0" y2="24.6" class="wire-only"/>
+<line x1="0.0" y1="29.1" x2="-12.0" y2="29.1" class="wire-only"/>
+<line x1="0.0" y1="33.7" x2="-12.0" y2="33.7" class="wire-only"/>
+<line x1="0.0" y1="60.0" x2="-12.0" y2="60.0" class="wire-only"/>
+<line x1="30.0" y1="80.0" x2="30.0" y2="92.0" class="wire-only"/>
+<text x="30.0" y="-7" class="refdes">DISP1</text>
+<text x="30.0" y="93.0" class="devname">COLOR=ROJO</text>
+<line data-seg="b" class="seg-on" x1="48.0" y1="10.4" x2="48.0" y2="36.8"/>
+<line data-seg="c" class="seg-on" x1="48.0" y1="43.2" x2="48.0" y2="69.6"/>
+</g>
+<g class="part" data-ref="GND1" transform="translate(920.0,320.0)">
+<line x1="12.0" y1="0" x2="12.0" y2="9.0" class="wire-only"/>
+<line x1="2.0" y1="9.0" x2="22.0" y2="9.0" class="wire-only"/>
+<line x1="6.0" y1="13.6" x2="18.0" y2="13.6" class="wire-only"/>
+<line x1="9.5" y1="18.0" x2="14.5" y2="18.0" class="wire-only"/>
+<line x1="12.0" y1="20.0" x2="12.0" y2="32.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">GND1</text>
+</g>
+</g>
+</g>
+<g class="legend" transform="translate(20,574)">
+<line x1="0" y1="6" x2="26" y2="6" stroke="#1a1a1a" stroke-width="2.6"/>
+<text x="32" y="10" class="legend-text">0 — nivel bajo</text>
+<line x1="136" y1="6" x2="162" y2="6" stroke="#0a8f2c" stroke-width="2.6"/>
+<text x="168" y="10" class="legend-text">1 — nivel alto</text>
+<line x1="273" y1="6" x2="299" y2="6" stroke="#9aa0a6" stroke-width="2.6"/>
+<text x="305" y="10" class="legend-text">X — indeterminado</text>
+<line x1="426" y1="6" x2="452" y2="6" stroke="#2f6fb3" stroke-width="2.6"/>
+<text x="458" y="10" class="legend-text">Z — alta impedancia</text>
+<line x1="590" y1="6" x2="616" y2="6" stroke="#d21b1b" stroke-width="2.6"/>
+<text x="622" y="10" class="legend-text">colisión de bus</text>
+<text x="734" y="10" class="legend-text">simulado: t=0.039 s · 39 eventos</text>
+</g>
+<g class="titleblock"><line x1="14" y1="620" x2="1054" y2="620" class="frame"/><text x="18" y="638" class="tb-title">CPU de 8 bits con bus de datos compartido y puerto de salida</text><text x="18" y="654" class="tb-sub">9 componentes · 63 redes · Voltio</text><text x="1050" y="654" class="tb-sub" text-anchor="end">Voltio cpu8_bus</text></g>
+</svg>

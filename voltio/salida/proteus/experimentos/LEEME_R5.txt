@@ -1,0 +1,39 @@
+RONDA 5 — R5_sr_latch_sintetico.pdsprj / .dsn
+================================================================================
+ESTE es el archivo importante: el primer DSN cuyo contenido no existe en
+ningún proyecto tuyo. Lo generó el motor Voltio desde cero:
+
+    examples/sr_latch.yaml  →  tools/emit_sr_dsn.py  →  este .dsn
+
+El circuito es un cerrojo SR con NANDs (memoria de un bit): dos estados
+lógicos S y R, dos puertas de un 74LS00 (aquí, dos paquetes separados U1 y U2
+usando cada uno su puerta A), dos LEDs con su resistencia, y una tierra
+implementada como LOGICSTATE en 0 (fuente ideal de nivel bajo, que es
+exactamente lo que es un riel).
+
+Cómo probarlo:
+  1. Doble clic en R5_sr_latch_sintetico.dsn   (o Open Project el .pdsprj)
+  2. Deberías ver nueve piezas en dos columnas y siete cables ortogonales.
+  3. Dale al play. Con S y R en 1, ambos LEDs quedan apagados: el cerrojo
+     arranca en X y X no enciende nada.
+  4. Pon S a 0 un instante y devuélvelo a 1: el LED rojo (Q) enciende y
+     SE QUEDA encendido. Eso es memoria.
+  5. Pon R a 0 un instante: enciende el verde (/Q) y el rojo se apaga.
+
+Qué puede salir mal y qué significaría cada cosa:
+  · No abre / diálogo de error     → la cabecera o el esqueleto no valen:
+                                     mándame el texto exacto del diálogo.
+  · Abre pero faltan piezas        → algún registro de componente mal cortado:
+                                     dime cuáles faltan.
+  · Piezas bien, cables sueltos    → offsets de patilla mal calibrados: dime
+                                     QUÉ pin de QUÉ pieza quedó sin cable y
+                                     con eso calibro ese offset para siempre.
+  · Todo bien pero al simular da
+    error de modelo                → el CDB o los PINOUTs no casan: también
+                                     tiene arreglo corto.
+  · Funciona todo y el cerrojo
+     mantiene su estado            → el escritor sintético existe. Y ese día
+                                     el flujo completo queda cerrado:
+                                     prompt → YAML → simulación → SVG → DSN.
+
+Cierra sin salvar si algo se ve mal, para conservar el espécimen.

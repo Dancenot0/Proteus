@@ -1,0 +1,30 @@
+RONDA 3 — R3_nand_relayout.pdsprj / .dsn
+================================================================================
+Qué es: TU Compuertas NAND.pdsprj, con las seis piezas re-colocadas según el
+layout que calcula el DSL de Voltio para la réplica del PDF. Los parches son
+de igual longitud (solo coordenadas), así que todo lo demás es tu archivo
+intacto: blobs, PINOUTs, CDB, sección de circuito.
+
+Qué SÍ se movió en el archivo: los marcadores de instancia y tres registros
+de conexión (espacio de cable). Qué NO se movió: los registros de componente
+en su otro espacio de coordenadas, y los cables de las puertas U1:A/B/D
+(sus registros de conexión usan un layout que aún no estoy leyendo bien).
+
+Qué mirar al abrirlo (doble clic en el .dsn, o Open Project el .pdsprj):
+
+  A) Las seis piezas aparecen en posiciones NUEVAS (layout de Voltio, más
+     compacto) y los cables se quedaron en las posiciones VIEJAS
+     → los marcadores en espacio de cable mandan sobre el dibujo.
+     Eso confirma el diseño del escritor: parchear solo espacio de cable.
+  B) Las piezas aparecen en sus posiciones VIEJAS
+     → mandan los registros de componente; entonces el escritor debe
+     parchear ambos espacios (fácil: ya sé dónde están los dos).
+  C) Proteus repara/reubica algo al abrir, o avisa de inconsistencia
+     → mándame el aviso tal cual: me dice qué estructura valida al cargar.
+
+En los tres casos hay información útil. En los tres casos, cierra sin salvar
+para no contaminar tu copia local del proyecto.
+
+Siguiente ronda (con tu respuesta): cierre del registro de conexión de
+puertas multi-compuerta y emisión del primer DSN 100% sintético de Voltio
+para la réplica del PDF: prompt → YAML → .dsn que abre y simula.

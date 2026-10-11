@@ -1,0 +1,53 @@
+* Contador de 4 bits con display de 7 segmentos
+* 6 componentes
+
+CLK1     CLOCK        Generador de reloj digital
+         pin Q          -> nodo CLK
+
+U1       74LS193      Contador binario síncrono de 4 bits, arriba/abajo, carga paralela
+         pin /MR        -> nodo VCC
+         pin /PL        -> nodo VCC
+         pin CPD        -> nodo VCC
+         pin CPU        -> nodo CLK
+         pin P          -> nodo 0
+         pin P[1]       -> nodo 0
+         pin P[2]       -> nodo 0
+         pin P[3]       -> nodo 0
+         pin Q          -> nodo Q[0]
+         pin Q[1]       -> nodo Q[1]
+         pin Q[2]       -> nodo Q[2]
+         pin Q[3]       -> nodo Q[3]
+
+U2       74LS48       Decodificador BCD a 7 segmentos, salidas activas altas
+         pin /BI        -> nodo VCC
+         pin /LT        -> nodo VCC
+         pin /RBI       -> nodo VCC
+         pin A          -> nodo Q[0]
+         pin A[1]       -> nodo Q[1]
+         pin A[2]       -> nodo Q[2]
+         pin A[3]       -> nodo Q[3]
+         pin a          -> nodo SEG[0]
+         pin a[1]       -> nodo SEG[1]
+         pin a[2]       -> nodo SEG[2]
+         pin a[3]       -> nodo SEG[3]
+         pin a[4]       -> nodo SEG[4]
+         pin a[5]       -> nodo SEG[5]
+         pin a[6]       -> nodo SEG[6]
+
+DISP1    7SEG-CC      Display de 7 segmentos, cátodo común
+         pin CC         -> nodo 0
+         pin a          -> nodo SEG[0]
+         pin a[1]       -> nodo SEG[1]
+         pin a[2]       -> nodo SEG[2]
+         pin a[3]       -> nodo SEG[3]
+         pin a[4]       -> nodo SEG[4]
+         pin a[5]       -> nodo SEG[5]
+         pin a[6]       -> nodo SEG[6]
+         pin dp         -> nodo 0
+
+GND1     GND          Tierra (0 V)
+         pin P          -> nodo 0
+
+VCC1     VCC          Alimentación positiva (+5 V por defecto)
+         pin P          -> nodo VCC
+

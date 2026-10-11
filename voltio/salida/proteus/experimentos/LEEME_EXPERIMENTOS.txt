@@ -1,0 +1,67 @@
+PROTOCOLO DE EXPERIMENTOS — ronda 1
+================================================================================
+Objetivo: calibrar los campos de coordenadas del binario DSN usando tu Proteus
+8.6 como oráculo. Los tres .dsn salen del MISMO proyecto real (SAP-8), con un
+único byte-cambio cada uno. Nada más varía.
+
+Cómo probar (File → Import Legacy Project → Schematic → Browse):
+
+  E0_control.dsn   Sin ningún cambio.
+                   ESPERADO: importa y ves el circuito SAP-8 tal cual.
+                   Si ESTO falla, todo lo demás da igual: díme exacto qué
+                   sale (captura del diálogo) y cambio el envoltorio.
+
+  E1_movX.dsn      Un u32 +300 en el componente 74126 (la puerta etiquetada O).
+                   ESPERADO: todo igual, pero esa pieza aparece desplazada
+                   ~3 cuadros a la DERECHA.
+                   Si se mueve ARRIBA/abajo → el campo era Y (swap).
+                   Si no se mueve nada → el campo no es coordenada.
+                   Si no abre → ese u32 era otra cosa (id/flags): valiosísimo
+                   saberlo igual.
+
+  E2_movY.dsn      El u32 de al lado, +300.
+                   ESPERADO: la pieza se mueve ~3 cuadros ABAJO (o derecha si
+                   era X; con E1 y E2 juntos queda resuelto el par).
+
+  E0_control.pdsprj  El mismo control pero re-empaquetado como proyecto.
+                   ESPERADO: File → Open Project lo abre sin quejarse.
+                   Esto valida que mi re-empaquetado ZIP no rompe nada, que es
+                   distinto de validar el DSN.
+
+Mándame qué pasó con cada uno (foto o frase basta). Con esas tres respuestas
+quedan fijados: el envoltorio, el camino de importación, y el par de
+coordenadas. Con las coordenadas fijadas puedo EMPEZAR a escribir esquemáticos
+propios: primero un componente suelto, luego dos y un cable.
+
+
+RESULTADOS RONDA 1 (Proteus 8.6 SP2, máquina del usuario)
+================================================================================
+E0_control.dsn / .pdsprj   ABREN (doble clic en el .dsn, sin importar).
+E1_movX.dsn                ABRE y el componente desplazado se ve desplazado:
+                           el u32 tras el timestamp ES la coordenada X.
+PERO al simular: "Cannot find pin [U?:D] / DSIM failed to connect pin D /
+Simulation FAILED".
+
+Diagnóstico: NO es el re-empaquetado. El DSN de E0 es byte-idéntico al del
+proyecto original de GitHub, y ese proyecto tiene puertas SIN ANOTAR dentro
+del subcircuito D-FLIPFLOP (se ven como "U?" en la hoja hija). DSIM no puede
+netlistear una referencia inexistente. El original fallaría igual.
+
+Consecuencias para el escritor de Voltio:
+  1. Todo componente emitido llevará referencia asignada siempre (el DSL de
+     Voltio ya lo exige: sin ref no hay circuito).
+  2. La plantilla de futuros experimentos y del escritor debe ser un proyecto
+     que SÍ simule: los del propio usuario (Compuertas NAND, multiplicador...),
+     no los samples de GitHub.
+  3. Que el fallo aparezca SOLO en la etapa DSIM, después de que PROSPICE
+     cargase el netlist, confirma que contenedor y secciones están íntegros.
+
+RONDA 2 (pendiente, sobre TU proyecto que sí simula)
+================================================================================
+Base: Compuertas NAND (el tuyo, no el del PDF).
+  base.pdsprj       salva tal cual.
+  con_cable.pdsprj  dibuja UN cable horizontal de exactamente 3 cuadros entre
+                    dos patillas que hoy no estén conectadas, y salva.
+  movido.pdsprj     mueve UNA componente 5 cuadros y salva.
+Con eso se cierra la escala de coordenadas de cable y se confirma que un
+registro insertado por ti ronda-tripa por tools/dsn_diff.py limpio.

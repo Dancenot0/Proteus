@@ -1,0 +1,39 @@
+* CPU de 8 bits con bus de datos compartido y puerto de salida
+* Generado por Voltio desde cpu8_bus
+*
+* --- Alimentación ---
+V_VCC VCC 0 DC 5
+
+* --- Componentes ---
+V_CLK1 CLK 0 clock(0) 0 5 0.001 0.001 0.001
+* U_CPU CPU8 — sin modelo SPICE (CPU de 8 bits educativa (conjunto de instrucciones configurable))
+*   pines: VCC WR_N ABUS_0 ABUS_10 ABUS_11 ABUS_12 ABUS_1 ABUS_2 ABUS_3 ABUS_4 ABUS_5 ABUS_6 ABUS_7 ABUS_8 ABUS_9 CLK DBUS_0 DBUS_1 DBUS_2 DBUS_3 DBUS_4 DBUS_5 DBUS_6 DBUS_7 PORT_STROBE
+* U_RAM 6264 — sin modelo SPICE (RAM estática 8K × 8 bits (64 kbit))
+*   pines: RAM_RD VCC ABUS_0 ABUS_10 ABUS_11 ABUS_12 ABUS_1 ABUS_2 ABUS_3 ABUS_4 ABUS_5 ABUS_6 ABUS_7 ABUS_8 ABUS_9 DBUS_0 DBUS_1 DBUS_2 DBUS_3 DBUS_4 DBUS_5 DBUS_6 DBUS_7
+XU_INV WR_N RAM_RD inv
+* U_245 74LS245 — sin modelo SPICE (Transceptor de bus octal tri-estado, bidireccional)
+*   pines: VCC 0 0 0 0 0 0 0 0 DBUS_B_0 DBUS_B_1 DBUS_B_2 DBUS_B_3 DBUS_B_4 DBUS_B_5 DBUS_B_6 DBUS_B_7 0
+* U_PORT 74LS273 — sin modelo SPICE (Registro de 8 flip-flops D con reset (clock ascendente))
+*   pines: VCC PORT_STROBE DBUS_0 DBUS_1 DBUS_2 DBUS_3 DBUS_4 DBUS_5 DBUS_6 DBUS_7 PORT0 PORT1 PORT2 PORT3 PORT_HI_0 PORT_HI_1 PORT_HI_2 PORT_HI_3
+* U_DEC 74LS48 — sin modelo SPICE (Decodificador BCD a 7 segmentos, salidas activas altas)
+*   pines: VCC VCC VCC PORT0 PORT1 PORT2 PORT3 SEG_0 SEG_1 SEG_2 SEG_3 SEG_4 SEG_5 SEG_6
+* DISP1 7SEG-CC — sin modelo SPICE (Display de 7 segmentos, cátodo común)
+*   pines: 0 SEG_0 SEG_1 SEG_2 SEG_3 SEG_4 SEG_5 SEG_6 0
+
+* --- Modelos ---
+
+* --- Avisos del exportador ---
+* ! U_CPU (CPU8): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! U_RAM (6264): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! U_245 (74LS245): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! U_PORT (74LS273): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! U_DEC (74LS48): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! DISP1 (7SEG-CC): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+
+* --- Análisis ---
+.tran 2e-05 0.04 UIC
+.control
+run
+* plot all
+.endc
+.end

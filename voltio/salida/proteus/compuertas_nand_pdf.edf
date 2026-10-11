@@ -1,0 +1,144 @@
+(edif compuertas_nand_pdf
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written (timeStamp 2026 10 11 00 49 42)
+      (author "Voltio") (program "Voltio") (version "0.1")))
+  (library VOLTIOLIB
+    (edifLevel 0)
+    (technology (numberDefinition))
+    (cell C_74LS00
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A0 (direction INPUT))
+          (port A1 (direction INPUT))
+          (port Y (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_74LS02
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A0 (direction INPUT))
+          (port A1 (direction INPUT))
+          (port Y (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_LOGICSTATE
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port Q (direction OUTPUT))
+        )
+      )
+    )
+  )
+  (design compuertas_nand_pdf
+    (cellRef TOPCELL (libraryRef VOLTIOLIB))
+    (view NETLIST
+      (viewType NETLIST)
+      (interface
+      )
+      (contents
+        (instance S (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance V (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance R (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance D (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance U1A (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (instance U1B (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (instance U1C (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (instance U1D (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (instance U2A (viewRef NETLIST (cellRef C_74LS02 (libraryRef VOLTIOLIB)))
+        )
+        (instance U3A (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (net S
+          (joined
+            (portRef Q (instanceRef S))
+            (portRef A0 (instanceRef U1A))
+            (portRef A1 (instanceRef U1A))
+          )
+        )
+        (net S_PRIMA
+          (joined
+            (portRef Y (instanceRef U1A))
+            (portRef A0 (instanceRef U1B))
+          )
+        )
+        (net V
+          (joined
+            (portRef Q (instanceRef V))
+            (portRef A1 (instanceRef U1B))
+          )
+        )
+        (net R
+          (joined
+            (portRef Q (instanceRef R))
+            (portRef A0 (instanceRef U1C))
+            (portRef A1 (instanceRef U1C))
+          )
+        )
+        (net R_PRIMA
+          (joined
+            (portRef Y (instanceRef U1C))
+            (portRef A0 (instanceRef U2A))
+          )
+        )
+        (net D
+          (joined
+            (portRef Q (instanceRef D))
+            (portRef A1 (instanceRef U2A))
+          )
+        )
+        (net NAND_B
+          (joined
+            (portRef Y (instanceRef U1B))
+            (portRef A0 (instanceRef U1D))
+          )
+        )
+        (net NOR_A
+          (joined
+            (portRef Y (instanceRef U2A))
+            (portRef A1 (instanceRef U1D))
+          )
+        )
+        (net SAL_U1D
+          (joined
+            (portRef Y (instanceRef U1D))
+            (portRef A0 (instanceRef U3A))
+            (portRef A1 (instanceRef U3A))
+          )
+        )
+        (net SALIDA
+          (joined
+            (portRef Y (instanceRef U3A))
+          )
+        )
+      )
+    )
+  )
+)

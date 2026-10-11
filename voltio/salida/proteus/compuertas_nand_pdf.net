@@ -1,0 +1,45 @@
+* Réplica de 'Compuertas NAND.PDF' (Proteus)
+* 10 componentes
+
+S        LOGICSTATE   Nivel lógico fijo, conmutable (0/1)
+         pin Q          -> nodo S
+
+V        LOGICSTATE   Nivel lógico fijo, conmutable (0/1)
+         pin Q          -> nodo V
+
+R        LOGICSTATE   Nivel lógico fijo, conmutable (0/1)
+         pin Q          -> nodo R
+
+D        LOGICSTATE   Nivel lógico fijo, conmutable (0/1)
+         pin Q          -> nodo D
+
+U1A      74LS00       Cuádruple NAND de 2 entradas
+         pin A0         -> nodo S
+         pin A1         -> nodo S
+         pin Y          -> nodo S_PRIMA
+
+U1B      74LS00       Cuádruple NAND de 2 entradas
+         pin A0         -> nodo S_PRIMA
+         pin A1         -> nodo V
+         pin Y          -> nodo NAND_B
+
+U1C      74LS00       Cuádruple NAND de 2 entradas
+         pin A0         -> nodo R
+         pin A1         -> nodo R
+         pin Y          -> nodo R_PRIMA
+
+U1D      74LS00       Cuádruple NAND de 2 entradas
+         pin A0         -> nodo NAND_B
+         pin A1         -> nodo NOR_A
+         pin Y          -> nodo SAL_U1D
+
+U2A      74LS02       Cuádruple NOR de 2 entradas
+         pin A0         -> nodo R_PRIMA
+         pin A1         -> nodo D
+         pin Y          -> nodo NOR_A
+
+U3A      74LS00       Cuádruple NAND de 2 entradas
+         pin A0         -> nodo SAL_U1D
+         pin A1         -> nodo SAL_U1D
+         pin Y          -> nodo SALIDA
+

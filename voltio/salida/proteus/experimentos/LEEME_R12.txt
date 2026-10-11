@@ -1,0 +1,29 @@
+RONDA 12 — R11 PERO CON TESTIGO DE CARGA
+=========================================================================
+R11 no pudo concluir: tu captura mostraba el dibujo ORIGINAL, así que esa
+ventana de Proteus no llegó a cargar el parche (¿Proteus ya abierto con otro
+documento? ¿doble clic en otro archivo?). Para que eso no vuelva a pasar en
+silencio, R12 lleva DOS cambios visibles e independientes:
+
+  P1 (testigo de carga): el codo del cable que baja de U2:A al pin 12 de
+     U1:D se hunde hasta la zona vacía de abajo. Si ves ese "V" gigante,
+     el archivo SÍ se cargó. Si no lo ves, cierra todo y repite: algo de tu
+     sesión está sirviendo el documento viejo.
+  P2 (sonda de conectividad): el tramo que ataba pin 1 con pin 2 de U3:A
+     ahora termina encima del pin 12 de U1:D.
+
+Procedimiento:
+  1. CIERRA TODAS las ventanas de Proteus.
+  2. Doble clic en R12_sonda.pdsprj. Comprueba que la barra de título diga
+     "R12_sonda".
+  3. Dibujo: ¿ves la V gigante? ¿ves el tie de U3:A roto (pin 2 colgando)?
+  4. Simula con S=1, V=1, R=0, D=0:
+       - contención / rojo / X en el pin 12 de U1:D  =>  CONECTIVIDAD
+         GEOMETRICA (los puntos del cable definen la red).
+       - lógica perfecta de siempre                  =>  CONECTIVIDAD POR
+         HANDLES (la red vive en los u32 de las colas de objeto).
+  5. De paso, si lo recuerdas: en R10b (el abanico al origen) la lógica
+     simulada, ¿era la correcta o era basura? Eso mismo discrimina y ya lo
+     tienes vivido.
+
+Cualquier combinación de respuestas acota el formato. Cierra sin salvar.

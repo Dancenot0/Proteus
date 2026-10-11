@@ -1,0 +1,7 @@
+Cantidad,Componente,Descripción,Encapsulado,Categoría,Referencias,Propiedades
+1,74LS00,Cuádruple NAND de 2 entradas,DIP,74xx,U1,
+1,GND,Tierra (0 V),DIP,fuentes,GND1,
+2,LOGICSTATE,"Nivel lógico fijo, conmutable (0/1)",DIP,fuentes,"S1, S2",
+1,PROBE,Sonda de tensión (muestra el nivel en el esquemático),DIP,instrumentos,P1,
+1,LED,Diodo emisor de luz,DIP,optoelectronica,D1,COLOR=ROJO
+1,RES,Resistencia,DIP,pasivos,R1,R=330

@@ -1,0 +1,7 @@
+Cantidad,Componente,Descripción,Encapsulado,Categoría,Referencias,Propiedades
+1,74LS193,"Contador binario síncrono de 4 bits, arriba/abajo, carga paralela",DIP,74xx,U1,
+1,74LS48,"Decodificador BCD a 7 segmentos, salidas activas altas",DIP,74xx,U2,
+1,7SEG-CC,"Display de 7 segmentos, cátodo común",DIP,displays,DISP1,COLOR=ROJO
+1,CLOCK,Generador de reloj digital,DIP,fuentes,CLK1,FREQ=1000
+1,GND,Tierra (0 V),DIP,fuentes,GND1,
+1,VCC,Alimentación positiva (+5 V por defecto),DIP,fuentes,VCC1,

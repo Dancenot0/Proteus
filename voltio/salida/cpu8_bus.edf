@@ -1,0 +1,721 @@
+(edif cpu8_bus
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written (timeStamp 2026 10 10 23 12 23)
+      (author "Voltio") (program "Voltio") (version "0.1")))
+  (library VOLTIOLIB
+    (edifLevel 0)
+    (technology (numberDefinition))
+    (cell C_6264
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A_0 (direction INPUT))
+          (port A_1 (direction INPUT))
+          (port A_10 (direction INPUT))
+          (port A_11 (direction INPUT))
+          (port A_12 (direction INPUT))
+          (port A_2 (direction INPUT))
+          (port A_3 (direction INPUT))
+          (port A_4 (direction INPUT))
+          (port A_5 (direction INPUT))
+          (port A_6 (direction INPUT))
+          (port A_7 (direction INPUT))
+          (port A_8 (direction INPUT))
+          (port A_9 (direction INPUT))
+          (port D_0 (direction INOUT))
+          (port D_1 (direction INOUT))
+          (port D_2 (direction INOUT))
+          (port D_3 (direction INOUT))
+          (port D_4 (direction INOUT))
+          (port D_5 (direction INOUT))
+          (port D_6 (direction INOUT))
+          (port D_7 (direction INOUT))
+          (port N_E (direction INPUT))
+          (port N_W (direction INPUT))
+        )
+      )
+    )
+    (cell C_74LS04
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A0 (direction INPUT))
+          (port Y (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_74LS245
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A_0 (direction INOUT))
+          (port A_1 (direction INOUT))
+          (port A_2 (direction INOUT))
+          (port A_3 (direction INOUT))
+          (port A_4 (direction INOUT))
+          (port A_5 (direction INOUT))
+          (port A_6 (direction INOUT))
+          (port A_7 (direction INOUT))
+          (port B_0 (direction INOUT))
+          (port B_1 (direction INOUT))
+          (port B_2 (direction INOUT))
+          (port B_3 (direction INOUT))
+          (port B_4 (direction INOUT))
+          (port B_5 (direction INOUT))
+          (port B_6 (direction INOUT))
+          (port B_7 (direction INOUT))
+          (port DIR (direction INPUT))
+          (port N_E (direction INPUT))
+        )
+      )
+    )
+    (cell C_74LS273
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port CP (direction INPUT))
+          (port D_0 (direction INPUT))
+          (port D_1 (direction INPUT))
+          (port D_2 (direction INPUT))
+          (port D_3 (direction INPUT))
+          (port D_4 (direction INPUT))
+          (port D_5 (direction INPUT))
+          (port D_6 (direction INPUT))
+          (port D_7 (direction INPUT))
+          (port N_MR (direction INPUT))
+          (port Q_0 (direction OUTPUT))
+          (port Q_1 (direction OUTPUT))
+          (port Q_2 (direction OUTPUT))
+          (port Q_3 (direction OUTPUT))
+          (port Q_4 (direction OUTPUT))
+          (port Q_5 (direction OUTPUT))
+          (port Q_6 (direction OUTPUT))
+          (port Q_7 (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_74LS48
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A_0 (direction INPUT))
+          (port A_1 (direction INPUT))
+          (port A_2 (direction INPUT))
+          (port A_3 (direction INPUT))
+          (port N_BI (direction INPUT))
+          (port N_LT (direction INPUT))
+          (port N_RBI (direction INPUT))
+          (port a_0 (direction OUTPUT))
+          (port a_1 (direction OUTPUT))
+          (port a_2 (direction OUTPUT))
+          (port a_3 (direction OUTPUT))
+          (port a_4 (direction OUTPUT))
+          (port a_5 (direction OUTPUT))
+          (port a_6 (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_7SEG_CC
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port CC (direction INPUT))
+          (port a_0 (direction INPUT))
+          (port a_1 (direction INPUT))
+          (port a_2 (direction INPUT))
+          (port a_3 (direction INPUT))
+          (port a_4 (direction INPUT))
+          (port a_5 (direction INPUT))
+          (port a_6 (direction INPUT))
+          (port dp (direction INPUT))
+        )
+      )
+    )
+    (cell C_CLOCK
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port Q (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_CPU8
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port ADDR_0 (direction OUTPUT))
+          (port ADDR_1 (direction OUTPUT))
+          (port ADDR_10 (direction OUTPUT))
+          (port ADDR_11 (direction OUTPUT))
+          (port ADDR_12 (direction OUTPUT))
+          (port ADDR_13 (direction OUTPUT))
+          (port ADDR_14 (direction OUTPUT))
+          (port ADDR_15 (direction OUTPUT))
+          (port ADDR_2 (direction OUTPUT))
+          (port ADDR_3 (direction OUTPUT))
+          (port ADDR_4 (direction OUTPUT))
+          (port ADDR_5 (direction OUTPUT))
+          (port ADDR_6 (direction OUTPUT))
+          (port ADDR_7 (direction OUTPUT))
+          (port ADDR_8 (direction OUTPUT))
+          (port ADDR_9 (direction OUTPUT))
+          (port CLK (direction INPUT))
+          (port DATA_0 (direction INOUT))
+          (port DATA_1 (direction INOUT))
+          (port DATA_2 (direction INOUT))
+          (port DATA_3 (direction INOUT))
+          (port DATA_4 (direction INOUT))
+          (port DATA_5 (direction INOUT))
+          (port DATA_6 (direction INOUT))
+          (port DATA_7 (direction INOUT))
+          (port HALT (direction OUTPUT))
+          (port N_IOREQ (direction OUTPUT))
+          (port N_MREQ (direction OUTPUT))
+          (port N_RD (direction OUTPUT))
+          (port N_RESET (direction INPUT))
+          (port N_WR (direction OUTPUT))
+          (port WSTROBE (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_GND
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port P (direction OUTPUT))
+        )
+      )
+    )
+  )
+  (design cpu8_bus
+    (cellRef TOPCELL (libraryRef VOLTIOLIB))
+    (view NETLIST
+      (viewType NETLIST)
+      (interface
+        (port A245_0 (direction INOUT))
+        (port A245_1 (direction INOUT))
+        (port A245_2 (direction INOUT))
+        (port A245_3 (direction INOUT))
+        (port A245_4 (direction INOUT))
+        (port A245_5 (direction INOUT))
+        (port A245_6 (direction INOUT))
+        (port A245_7 (direction INOUT))
+        (port BUS_DIR (direction INOUT))
+        (port BUS_EN (direction INOUT))
+        (port DEC_CTRL (direction INOUT))
+        (port GND (direction INOUT))
+        (port PORT_MR (direction INOUT))
+        (port RAM_WR (direction INOUT))
+        (port RST (direction INOUT))
+      )
+      (contents
+        (instance CLK1 (viewRef NETLIST (cellRef C_CLOCK (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            DUTY=50
+            FREQ=500
+          "))
+        )
+        (instance U_CPU (viewRef NETLIST (cellRef C_CPU8 (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            ISA=SAP8
+            PROGRAM=01 42 08 00 01 21 08 00 09
+          "))
+        )
+        (instance U_RAM (viewRef NETLIST (cellRef C_6264 (libraryRef VOLTIOLIB)))
+        )
+        (instance U_INV (viewRef NETLIST (cellRef C_74LS04 (libraryRef VOLTIOLIB)))
+        )
+        (instance U_245 (viewRef NETLIST (cellRef C_74LS245 (libraryRef VOLTIOLIB)))
+        )
+        (instance U_PORT (viewRef NETLIST (cellRef C_74LS273 (libraryRef VOLTIOLIB)))
+        )
+        (instance U_DEC (viewRef NETLIST (cellRef C_74LS48 (libraryRef VOLTIOLIB)))
+        )
+        (instance DISP1 (viewRef NETLIST (cellRef C_7SEG_CC (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            COLOR=ROJO
+          "))
+        )
+        (instance GND1 (viewRef NETLIST (cellRef C_GND (libraryRef VOLTIOLIB)))
+        )
+        (net CLK
+          (joined
+            (portRef Q (instanceRef CLK1))
+            (portRef CLK (instanceRef U_CPU))
+          )
+        )
+        (net RST
+          (joined
+            (portRef RST)
+            (portRef N_RESET (instanceRef U_CPU))
+          )
+        )
+        (net ABUS_0
+          (joined
+            (portRef ADDR_0 (instanceRef U_CPU))
+            (portRef A_0 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "0"))
+        )
+        (net ABUS_1
+          (joined
+            (portRef ADDR_1 (instanceRef U_CPU))
+            (portRef A_1 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "1"))
+        )
+        (net ABUS_2
+          (joined
+            (portRef ADDR_2 (instanceRef U_CPU))
+            (portRef A_2 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "2"))
+        )
+        (net ABUS_3
+          (joined
+            (portRef ADDR_3 (instanceRef U_CPU))
+            (portRef A_3 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "3"))
+        )
+        (net ABUS_4
+          (joined
+            (portRef ADDR_4 (instanceRef U_CPU))
+            (portRef A_4 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "4"))
+        )
+        (net ABUS_5
+          (joined
+            (portRef ADDR_5 (instanceRef U_CPU))
+            (portRef A_5 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "5"))
+        )
+        (net ABUS_6
+          (joined
+            (portRef ADDR_6 (instanceRef U_CPU))
+            (portRef A_6 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "6"))
+        )
+        (net ABUS_7
+          (joined
+            (portRef ADDR_7 (instanceRef U_CPU))
+            (portRef A_7 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "7"))
+        )
+        (net ABUS_8
+          (joined
+            (portRef ADDR_8 (instanceRef U_CPU))
+            (portRef A_8 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "8"))
+        )
+        (net ABUS_9
+          (joined
+            (portRef ADDR_9 (instanceRef U_CPU))
+            (portRef A_9 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "9"))
+        )
+        (net ABUS_10
+          (joined
+            (portRef ADDR_10 (instanceRef U_CPU))
+            (portRef A_10 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "10"))
+        )
+        (net ABUS_11
+          (joined
+            (portRef ADDR_11 (instanceRef U_CPU))
+            (portRef A_11 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "11"))
+        )
+        (net ABUS_12
+          (joined
+            (portRef ADDR_12 (instanceRef U_CPU))
+            (portRef A_12 (instanceRef U_RAM))
+          )
+          (property BUS (string "ABUS"))
+          (property BIT (string "12"))
+        )
+        (net A245_0
+          (joined
+            (portRef A245_0)
+            (portRef A_0 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "0"))
+        )
+        (net A245_1
+          (joined
+            (portRef A245_1)
+            (portRef A_1 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "1"))
+        )
+        (net A245_2
+          (joined
+            (portRef A245_2)
+            (portRef A_2 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "2"))
+        )
+        (net A245_3
+          (joined
+            (portRef A245_3)
+            (portRef A_3 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "3"))
+        )
+        (net A245_4
+          (joined
+            (portRef A245_4)
+            (portRef A_4 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "4"))
+        )
+        (net A245_5
+          (joined
+            (portRef A245_5)
+            (portRef A_5 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "5"))
+        )
+        (net A245_6
+          (joined
+            (portRef A245_6)
+            (portRef A_6 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "6"))
+        )
+        (net A245_7
+          (joined
+            (portRef A245_7)
+            (portRef A_7 (instanceRef U_245))
+          )
+          (property BUS (string "A245"))
+          (property BIT (string "7"))
+        )
+        (net DBUS_0
+          (joined
+            (portRef DATA_0 (instanceRef U_CPU))
+            (portRef D_0 (instanceRef U_RAM))
+            (portRef D_0 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "0"))
+        )
+        (net DBUS_1
+          (joined
+            (portRef DATA_1 (instanceRef U_CPU))
+            (portRef D_1 (instanceRef U_RAM))
+            (portRef D_1 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "1"))
+        )
+        (net DBUS_2
+          (joined
+            (portRef DATA_2 (instanceRef U_CPU))
+            (portRef D_2 (instanceRef U_RAM))
+            (portRef D_2 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "2"))
+        )
+        (net DBUS_3
+          (joined
+            (portRef DATA_3 (instanceRef U_CPU))
+            (portRef D_3 (instanceRef U_RAM))
+            (portRef D_3 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "3"))
+        )
+        (net DBUS_4
+          (joined
+            (portRef DATA_4 (instanceRef U_CPU))
+            (portRef D_4 (instanceRef U_RAM))
+            (portRef D_4 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "4"))
+        )
+        (net DBUS_5
+          (joined
+            (portRef DATA_5 (instanceRef U_CPU))
+            (portRef D_5 (instanceRef U_RAM))
+            (portRef D_5 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "5"))
+        )
+        (net DBUS_6
+          (joined
+            (portRef DATA_6 (instanceRef U_CPU))
+            (portRef D_6 (instanceRef U_RAM))
+            (portRef D_6 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "6"))
+        )
+        (net DBUS_7
+          (joined
+            (portRef DATA_7 (instanceRef U_CPU))
+            (portRef D_7 (instanceRef U_RAM))
+            (portRef D_7 (instanceRef U_PORT))
+          )
+          (property BUS (string "DBUS"))
+          (property BIT (string "7"))
+        )
+        (net DBUS_B_0
+          (joined
+            (portRef B_0 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "0"))
+        )
+        (net DBUS_B_1
+          (joined
+            (portRef B_1 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "1"))
+        )
+        (net DBUS_B_2
+          (joined
+            (portRef B_2 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "2"))
+        )
+        (net DBUS_B_3
+          (joined
+            (portRef B_3 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "3"))
+        )
+        (net DBUS_B_4
+          (joined
+            (portRef B_4 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "4"))
+        )
+        (net DBUS_B_5
+          (joined
+            (portRef B_5 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "5"))
+        )
+        (net DBUS_B_6
+          (joined
+            (portRef B_6 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "6"))
+        )
+        (net DBUS_B_7
+          (joined
+            (portRef B_7 (instanceRef U_245))
+          )
+          (property BUS (string "DBUS_B"))
+          (property BIT (string "7"))
+        )
+        (net WR_N
+          (joined
+            (portRef N_WR (instanceRef U_CPU))
+            (portRef A0 (instanceRef U_INV))
+          )
+        )
+        (net RAM_RD
+          (joined
+            (portRef Y (instanceRef U_INV))
+            (portRef N_E (instanceRef U_RAM))
+          )
+        )
+        (net RAM_WR
+          (joined
+            (portRef RAM_WR)
+            (portRef N_W (instanceRef U_RAM))
+          )
+        )
+        (net BUS_EN
+          (joined
+            (portRef BUS_EN)
+            (portRef N_E (instanceRef U_245))
+          )
+        )
+        (net BUS_DIR
+          (joined
+            (portRef BUS_DIR)
+            (portRef DIR (instanceRef U_245))
+          )
+        )
+        (net PORT_MR
+          (joined
+            (portRef PORT_MR)
+            (portRef N_MR (instanceRef U_PORT))
+          )
+        )
+        (net PORT_STROBE
+          (joined
+            (portRef WSTROBE (instanceRef U_CPU))
+            (portRef CP (instanceRef U_PORT))
+          )
+        )
+        (net PORT0
+          (joined
+            (portRef Q_0 (instanceRef U_PORT))
+            (portRef A_0 (instanceRef U_DEC))
+          )
+        )
+        (net PORT1
+          (joined
+            (portRef Q_1 (instanceRef U_PORT))
+            (portRef A_1 (instanceRef U_DEC))
+          )
+        )
+        (net PORT2
+          (joined
+            (portRef Q_2 (instanceRef U_PORT))
+            (portRef A_2 (instanceRef U_DEC))
+          )
+        )
+        (net PORT3
+          (joined
+            (portRef Q_3 (instanceRef U_PORT))
+            (portRef A_3 (instanceRef U_DEC))
+          )
+        )
+        (net PORT_HI_0
+          (joined
+            (portRef Q_4 (instanceRef U_PORT))
+          )
+          (property BUS (string "PORT_HI"))
+          (property BIT (string "0"))
+        )
+        (net PORT_HI_1
+          (joined
+            (portRef Q_5 (instanceRef U_PORT))
+          )
+          (property BUS (string "PORT_HI"))
+          (property BIT (string "1"))
+        )
+        (net PORT_HI_2
+          (joined
+            (portRef Q_6 (instanceRef U_PORT))
+          )
+          (property BUS (string "PORT_HI"))
+          (property BIT (string "2"))
+        )
+        (net PORT_HI_3
+          (joined
+            (portRef Q_7 (instanceRef U_PORT))
+          )
+          (property BUS (string "PORT_HI"))
+          (property BIT (string "3"))
+        )
+        (net DEC_CTRL
+          (joined
+            (portRef DEC_CTRL)
+            (portRef N_LT (instanceRef U_DEC))
+            (portRef N_RBI (instanceRef U_DEC))
+            (portRef N_BI (instanceRef U_DEC))
+          )
+        )
+        (net SEG_0
+          (joined
+            (portRef a_0 (instanceRef U_DEC))
+            (portRef a_0 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "0"))
+        )
+        (net SEG_1
+          (joined
+            (portRef a_1 (instanceRef U_DEC))
+            (portRef a_1 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "1"))
+        )
+        (net SEG_2
+          (joined
+            (portRef a_2 (instanceRef U_DEC))
+            (portRef a_2 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "2"))
+        )
+        (net SEG_3
+          (joined
+            (portRef a_3 (instanceRef U_DEC))
+            (portRef a_3 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "3"))
+        )
+        (net SEG_4
+          (joined
+            (portRef a_4 (instanceRef U_DEC))
+            (portRef a_4 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "4"))
+        )
+        (net SEG_5
+          (joined
+            (portRef a_5 (instanceRef U_DEC))
+            (portRef a_5 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "5"))
+        )
+        (net SEG_6
+          (joined
+            (portRef a_6 (instanceRef U_DEC))
+            (portRef a_6 (instanceRef DISP1))
+          )
+          (property BUS (string "SEG"))
+          (property BIT (string "6"))
+        )
+        (net GND
+          (joined
+            (portRef GND)
+            (portRef P (instanceRef GND1))
+            (portRef CC (instanceRef DISP1))
+            (portRef dp (instanceRef DISP1))
+          )
+        )
+      )
+    )
+  )
+)

@@ -1,0 +1,27 @@
+* Contador de 4 bits con display de 7 segmentos
+* Generado por Voltio desde contador_7seg
+*
+* --- Alimentación ---
+V_VCC VCC 0 DC 5
+
+* --- Componentes ---
+V_CLK1 CLK 0 clock(0) 0 5 0.0005 0.0005 0.0005
+* U1 74LS193 — sin modelo SPICE (Contador binario síncrono de 4 bits, arriba/abajo, carga paralela)
+*   pines: VCC VCC VCC CLK 0 0 0 0 Q_0 Q_1 Q_2 Q_3
+* U2 74LS48 — sin modelo SPICE (Decodificador BCD a 7 segmentos, salidas activas altas)
+*   pines: VCC VCC VCC Q_0 Q_1 Q_2 Q_3 SEG_0 SEG_1 SEG_2 SEG_3 SEG_4 SEG_5 SEG_6
+* DISP1 7SEG-CC — sin modelo SPICE (Display de 7 segmentos, cátodo común)
+*   pines: 0 SEG_0 SEG_1 SEG_2 SEG_3 SEG_4 SEG_5 SEG_6 0
+
+* --- Avisos del exportador ---
+* ! U1 (74LS193): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! U2 (74LS48): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+* ! DISP1 (7SEG-CC): no hay modelo SPICE; se emite como comentario. Este componente es digital complejo y necesita un subcircuito a medida o simulación por eventos (que es lo que hace Voltio).
+
+* --- Análisis ---
+.tran 1e-05 0.02 UIC
+.control
+run
+* plot all
+.endc
+.end

@@ -1,0 +1,28 @@
+RONDA 7 — DOS CRUCES, CUATRO ARCHIVOS (+1)
+================================================================================
+La ronda 6 dijo que hay DOS bugs independientes:
+  · sin componentes  → SEH trap KERNELBASE   (faltaba la 2.ª sección)
+  · con componentes  → access violation LXLCORE
+
+Todos los R7 llevan ya la segunda sección (ISIS CIRCUIT FILE) vacía, que es la
+que tu proyecto vacío sí tiene y mis R5/R6 no llevaban. Prueba con doble clic,
+en orden, y anota abre/estrella:
+
+  R7c_esqueleto_seccion      solo esqueleto + sección vacía + CDB
+  R7f_pinouts_seccion        + registros PINOUT
+  R7e_componentes_seccion    + los 9 componentes
+  R7a_completo_secvacia      + cables  (el cerrojo SR completo)
+  R7b_completo_sectpl        idem pero con la sección de circuito de tu
+                             proyecto original (por si la vacía no basta)
+
+Lectura de resultados:
+  R7c estrella  → el esqueleto/CDB/seguimiento de la sección sigue mal.
+  R7c abre, R7f estrella   → PINOUTs mal cortados.
+  R7f abre, R7e estrella   → registros de componente.
+  R7e abre, R7a estrella   → registros de cable.
+  R7a abre      → ESCRITOR COMPLETO PARA ABRIR; a simular se ha dicho.
+  R7a estrella pero R7b abre → la sección vacía no basta: hay que sintetizar
+                               también los objetos de simulación (siguiente
+                               montaña, ya con nombre y apellidos).
+
+Mándame la secuencia de cinco sí/no. Cierra sin salvar lo que abra.

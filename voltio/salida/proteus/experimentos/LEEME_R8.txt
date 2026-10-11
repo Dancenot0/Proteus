@@ -1,0 +1,27 @@
+RONDA 8 — SIN PINOUTs, Y EL CDB AISLADO
+================================================================================
+Cambios respecto a R7: los registros PINOUT desaparecen (el blob ya lleva
+{PINOUT=...} dentro, y PRIMS.DLL se atragantó con ellos). Y el CDB se varía
+para aislar el cierre silencioso de R7c.
+
+Orden de prueba (doble clic, cerrar sin salvar):
+
+  R8a_esqueleto_esqueleto? no: R8a_esqueleto_cdbvacio
+      esqueleto + sección vacía + CDB VACÍO (el del proyecto sin objetos).
+      Debería abrir como un proyecto en blanco. Si se cierra en silencio de
+      nuevo, el CDB no era el culpable y hay que mirar el esqueleto.
+
+  R8b_componentes_sinpin
+      + los 9 componentes, CDB de tu plantilla.
+      Si abre: los componentes están bien y el cierre de R7c era el CDB
+      inconsistente. Si estrella en LXLCORE: los registros de componente.
+
+  R8c_completo_sinpin
+      + los 16 cables del cerrojo.
+      Si abre: ESCRITOR VÁLIDO. Prueba el play: S y R en 1 → LEDs apagados;
+      pulso en S → rojo encendido y se queda.
+      Si estrella: los cables sintéticos, y entonces comparo mis 16 contra
+      los 8 tuyos campo por campo.
+
+Y si te sobra un clic: R7e y R7a de la ronda anterior siguen ahí para
+confirmar que con PINOUTs todo empeora (deben estrellarse en PRIMS).

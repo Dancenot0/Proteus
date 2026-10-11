@@ -1,0 +1,43 @@
+RONDA 10 — BISECCIÓN INVERSA SOBRE TU PROYECTO (nada sintetizado)
+=================================================================
+Contexto: R8 demostró que la sección 2 (ISIS CIRCUIT FILE) debe reflejar 1:1 a
+la sección 1. Y esta ronda descubrí que los papeles están invertidos respecto a
+mi modelo anterior:
+  * sección 1 (SCHEMATIC) = DIBUJO: 5 registros-ancla (uno por familia), formas
+    gráficas de los cuerpos y cables restantes, y los 28 marcadores de texto.
+  * sección 2 (CIRCUIT)   = ELECTRICA: 12 objetos (4 estados + 5 puertas 74LS00
+    + 74LS02 + LED + RES) y 15 tramos de cable con sus propios coordenadas.
+  Esto explica R3 ("abrió y simuló" porque yo sólo moví el dibujo; la eléctrica
+  quedó intacta) y por qué mis sintéticos mueren: su sección 2 no corresponde.
+
+Pruebas (doble clic en el .pdsprj, como siempre):
+  R10a_nand_control.pdsprj      copia exacta de tu Compuertas NAND.
+                                Esperado: abre y simula (control positivo).
+  R10b_nand_cablesacero.pdsprj  tu proyecto con los PUNTOS de los 8 cables
+                                eléctricos puestos en (0,0) (sección 2; el
+                                dibujo no se toca).
+                                * abre y simula raro (todo cortocircuitado en
+                                  el origen)  => los cables de sección 2 se
+                                  leen geométricamente: mi escritor debe
+                                  emitirlos tal cual.
+                                * crashea     => el formato de cable que creo
+                                  entender no es el que Proteus parsea.
+  R10c_nand_sinmarcadores.pdsprj  tu proyecto sin los 28 textos (refs, familias,
+                                etiquetas booleanas) de la sección 1.
+                                * abre        => los marcadores son cosméticos:
+                                  mi escritor puede omitirlos o fallar en ellos
+                                  sin matar el archivo.
+                                * crashea     => los marcadores carry identidad
+                                  (refdes!) y son obligatorios.
+
+Interpretación cruzada con R8:
+  R8a cierre silencioso  = sección 2 vacía con objetos de dibujo presentes.
+  R8b MSVCR90 (CRT)      = registros sintéticos míos en sección 1 con cadena
+                           mal terminada o longitud mentirosa (strlen lee de
+                           más): el crash de CRT es firma de string corrupto.
+  R8c LXLCORE            = sección 2 de plantilla con dibujo mío: inconsistencia
+                           de objetos entre secciones.
+
+Siguiente montaña (ya empezada en local): decodificar la gramática de los 6 KB
+de la sección 2 alineando tres proyectos tuyos (vacío, Con_cable, NAND). Con
+esa gramática el escritor emitirá sección 2 propia y cerraremos el ciclo.

@@ -1,0 +1,35 @@
+Cómo meter "Contador de 4 bits con display de 7 segmentos" en Proteus 8 (probado contra 8.6 SP2)
+============================================================
+
+Lo que tu Proteus 8.6 acepta HOY por la interfaz:
+
+  · File → Open Project            → archivos .pdsprj
+  · File → Import Legacy Project   → esquemáticos .dsn / .DSN antiguos
+  · (NO hay importación EDIF en el menú de 8.6: esa vía existe en la
+     documentación de Labcenter pero no está expuesta en esta versión)
+
+Estado de este paquete:
+
+  contador_7seg.net   netlist plano componente a componente y pin a pin.
+             Con esto puedes reconstruir el esquema a mano en media
+             hora, o esperar a que el escritor nativo esté listo.
+
+  contador_7seg.edf   EDIF 2 0 0. Inútil en tu 8.6 por lo dicho arriba, pero lo
+            留 dejan otros programas (KiCad lo abre como netlist).
+
+  contador_7seg.pdsprj  contenedor de proyecto con ROOT.DSN marcador de
+             posición: NO lo abras, se queda cargando para siempre
+             (comprobado en tu máquina). Es el hueco que falta por
+             rellenar: el binario del esquemático.
+
+Por qué falta el .dsn bueno, en una frase: el formato guarda los
+componentes como registros con cabecera y un blob de propiedades en
+texto plano (eso ya se lee y se escribe), pero los CABLES viven en
+registros cuya gramática aún no está cerrada (no aparecen como
+registros de tipo 14 con coordenadas u32; se sospecha coordenadas u16
+o un enum propio). Cada ronda de experimentos con tu Proteus como
+oráculo cierra un campo; el protocolo está en
+salida/proteus/experimentos/LEEME_EXPERIMENTOS.txt y los hallazgos en
+docs/PROTEUS_DSN.md.
+
+Generado por Voltio.

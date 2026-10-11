@@ -1,0 +1,133 @@
+(edif compuerta_nand
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written (timeStamp 2026 10 10 23 12 23)
+      (author "Voltio") (program "Voltio") (version "0.1")))
+  (library VOLTIOLIB
+    (edifLevel 0)
+    (technology (numberDefinition))
+    (cell C_74LS00
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A0 (direction INPUT))
+          (port A1 (direction INPUT))
+          (port Y (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_GND
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port P (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_LED
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port A (direction INPUT))
+          (port K (direction INPUT))
+        )
+      )
+    )
+    (cell C_LOGICSTATE
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port Q (direction OUTPUT))
+        )
+      )
+    )
+    (cell C_PROBE
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port IN (direction INPUT))
+        )
+      )
+    )
+    (cell C_RES
+      (cellType GENERIC)
+      (view NETLIST (viewType NETLIST)
+        (interface
+          (port C_1 (direction INOUT))
+          (port C_2 (direction INOUT))
+        )
+      )
+    )
+  )
+  (design compuerta_nand
+    (cellRef TOPCELL (libraryRef VOLTIOLIB))
+    (view NETLIST
+      (viewType NETLIST)
+      (interface
+        (port GND (direction INOUT))
+      )
+      (contents
+        (instance S1 (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance S2 (viewRef NETLIST (cellRef C_LOGICSTATE (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            STATE=0
+          "))
+        )
+        (instance U1 (viewRef NETLIST (cellRef C_74LS00 (libraryRef VOLTIOLIB)))
+        )
+        (instance R1 (viewRef NETLIST (cellRef C_RES (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            R=330
+          "))
+        )
+        (instance D1 (viewRef NETLIST (cellRef C_LED (libraryRef VOLTIOLIB)))
+          (property VALUES (string "
+            COLOR=ROJO
+          "))
+        )
+        (instance GND1 (viewRef NETLIST (cellRef C_GND (libraryRef VOLTIOLIB)))
+        )
+        (instance P1 (viewRef NETLIST (cellRef C_PROBE (libraryRef VOLTIOLIB)))
+        )
+        (net A
+          (joined
+            (portRef Q (instanceRef S1))
+            (portRef A0 (instanceRef U1))
+          )
+        )
+        (net B
+          (joined
+            (portRef Q (instanceRef S2))
+            (portRef A1 (instanceRef U1))
+          )
+        )
+        (net Y
+          (joined
+            (portRef Y (instanceRef U1))
+            (portRef C_1 (instanceRef R1))
+            (portRef IN (instanceRef P1))
+          )
+        )
+        (net LED_A
+          (joined
+            (portRef C_2 (instanceRef R1))
+            (portRef A (instanceRef D1))
+          )
+        )
+        (net GND
+          (joined
+            (portRef GND)
+            (portRef K (instanceRef D1))
+            (portRef P (instanceRef GND1))
+          )
+        )
+      )
+    )
+  )
+)

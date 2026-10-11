@@ -1,0 +1,24 @@
+RONDA 6 — BISECCIÓN DEL CRASH DE LXLCORE.DLL
+================================================================================
+El R5 se estrella igual que el R5-v1, y las dos versiones solo comparten
+algunas piezas. Estos cuatro archivos aíslan cuál:
+
+  R6a_solo_esqueleto.dsn    cabecera + estilos + opciones + CDB. SIN objetos.
+  R6b_solo_componentes.dsn  esqueleto + los 9 registros de componente + PINOUTs.
+  R6c_solo_cables.dsn       esqueleto + los 16 registros de cable, sin piezas.
+  R6d_completo.dsn          todo junto (equivale al R5 corregido).
+
+Prueba: doble clic en cada uno, en este orden, y anota cuál abre y cuál se
+estrella:
+
+  · Si R6a se estrella          → el problema es el esqueleto o el CDB.
+  · Si R6a abre y R6b se estrella → registros de componente o PINOUTs.
+  · Si R6b abre y R6c se estrella → registros de cable (mi formato sintetizado).
+  · Si R6c abre y R6d se estrella → interacción (contadores o índices entre
+                                    secciones), no un registro suelto.
+  · Si R6d abre                 → el R5 que probaste tenía aún el bug de los
+                                    dos bytes de tipo; ya está corregido: ¡sigue!
+
+Con ese patrón de cuatro sí/no, el culpable queda acotado a una familia de
+registros y la siguiente ronda lo arregla o lo explota a fondo.
+Cierra sin salvar todo lo que abra.
