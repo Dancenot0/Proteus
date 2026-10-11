@@ -1,0 +1,61 @@
+# Cerrojo SR con puertas NAND: el circuito de memoria más pequeño que existe.
+#
+# Nuevo a propósito: no está en los proyectos del usuario ni en los otros
+# ejemplos de Voltio. Elige además solo familias que existen en las plantillas
+# reales de Proteus 8.6 (74LS00, LOGICSTATE, LED-RED, RES), para que sea el
+# primer candidato del escritor de DSN sintético en cuanto llegue la
+# calibración de coordenadas.
+#
+# Funcionamiento (entradas activas en BAJA, como manda la tradición):
+#
+#   /S=0, /R=1  →  SET      Q queda en 1
+#   /S=1, /R=0  →  RESET    Q queda en 0
+#   /S=1, /R=1  →  MANTIENE Q conserva su valor: es memoria
+#   /S=0, /R=0  →  PROHIBIDO ambas salidas a 1; al salir de aquí el estado
+#                   queda indefinido (gana la puerta que conmute primero)
+#
+# Al arrancar, con las dos entradas inactivas y el lazo sin inicializar, Q y
+# /Q valen X: los dos LEDs quedan apagados y el simulador no inventa un
+# estado. Eso es correcto y es justo lo que un simulador de dos valores
+# (0/1) no puede representar.
+name: sr_latch
+title: "Cerrojo SR con NANDs: memoria de un bit"
+meta:
+  author: Voltio
+  description: >
+    Dos puertas NAND del mismo 74LS00 realimentadas en cruz. Un pulso bajo en
+    /S lo pone en 1; un pulso bajo en /R lo pone en 0; con ambas altas
+    recuerda. Los LEDs muestran Q y /Q a través de sus resistencias.
+
+simulation:
+  timescale: 1ms
+  duration: 60ms
+
+parts:
+  - {ref: S,  part: LOGICSTATE, at: [40, 60],  props: {STATE: "1"}}
+  - {ref: R,  part: LOGICSTATE, at: [40, 200], props: {STATE: "1"}}
+
+  - {ref: U1A, part: 74LS00, at: [220, 60]}
+  - {ref: U1B, part: 74LS00, at: [220, 200]}
+
+  - {ref: R1, part: RES, at: [400, 60],  props: {R: 330}}
+  - {ref: R2, part: RES, at: [400, 200], props: {R: 330}}
+
+  - {ref: D1, part: LED, at: [500, 60],  props: {COLOR: ROJO}}   # Q
+  - {ref: D2, part: LED, at: [500, 200], props: {COLOR: VERDE}}  # /Q
+
+  - {ref: G1, part: GND, at: [600, 300]}
+
+nets:
+  # Entradas activas en baja: el LOGICSTATE en 1 es el estado de reposo.
+  - {name: nS, connect: [S.Q, U1A.A0]}
+  - {name: nR, connect: [R.Q, U1B.A0]}
+
+  # El lazo cruzado: la salida de cada puerta entra en la otra.
+  - {name: Q,  connect: [U1A.Y, U1B.A1, R1.1]}
+  - {name: nQ, connect: [U1B.Y, U1A.A1, R2.1]}
+
+  # Indicadores
+  - {name: LEDQ,  connect: [R1.2, D1.A]}
+  - {name: LEDnQ, connect: [R2.2, D2.A]}
+  - {name: GND,   connect: [G1.P, D1.K, D2.K]}

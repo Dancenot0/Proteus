@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="728" height="506" viewBox="0 0 728 506" font-family="ui-sans-serif, system-ui, sans-serif">
+<style>
+  .grid       { fill: #d8dce2; }
+  .body       { fill: #ffffff; stroke: #23272e; stroke-width: 1.6; }
+  .wire-only  { fill: none; stroke: #23272e; stroke-width: 1.6; }
+  .wire       { fill: none; stroke: #4a4f57; stroke-width: 1.6; stroke-linejoin: round; }
+  .busband    { fill: none; stroke: #23272e; stroke-width: 4.5; stroke-linejoin: round; }
+  .bus-slash  { stroke: #23272e; stroke-width: 1.6; }
+  .junction   { fill: #23272e; }
+  .contact    { fill: #ffffff; stroke: #23272e; stroke-width: 1.4; }
+  .emit       { fill: none; stroke: #d21b1b; stroke-width: 1.2; }
+  .seg        { stroke: #c9ced6; stroke-width: 5; stroke-linecap: round; fill: none; }
+  .seg-on     { stroke: #ff2d2d; stroke-width: 5; stroke-linecap: round; fill: none; }
+  .lcd-screen { fill: #b9d7a8; stroke: #23272e; stroke-width: 1.2; }
+  .lcd-text   { font: 600 9px ui-monospace, Menlo, Consolas, monospace; fill: #16210f; }
+  .led-glow   { fill: #ff3b30; opacity: 0.35; }
+  .refdes     { font: 700 11px ui-sans-serif, system-ui, sans-serif; fill: #23272e;
+                text-anchor: middle; }
+  .devname    { font: 10px ui-sans-serif, system-ui, sans-serif; fill: #565c66;
+                text-anchor: middle; }
+  .pinname    { font: 8.5px ui-monospace, Menlo, Consolas, monospace; fill: #6b7280; }
+  .net-label  { font: 9.5px ui-monospace, Menlo, Consolas, monospace; fill: #2f6fb3;
+                text-anchor: middle; stroke: #fbfbfd; stroke-width: 3px;
+                paint-order: stroke; }
+  .state-text { font: 700 12px ui-monospace, Menlo, Consolas, monospace; fill: #23272e;
+                text-anchor: middle; }
+  .probe-text { font: 700 11px ui-monospace, Menlo, Consolas, monospace; fill: #0a8f2c;
+                text-anchor: middle; }
+  .live-value { font: 9px ui-monospace, Menlo, Consolas, monospace; fill: #7a4bd1;
+                text-anchor: middle; }
+  .symbol-letter { font: 700 12px ui-sans-serif, system-ui, sans-serif; fill: #23272e;
+                   text-anchor: middle; }
+  .tie-box    { fill: #fff6d6; stroke: #b58900; stroke-width: 1.2; }
+  .tie-text   { font: 700 11px ui-monospace, Menlo, Consolas, monospace; fill: #7a5c00;
+                text-anchor: middle; }
+  .rail .wire { stroke: #23272e; }
+  .legend-text{ font: 10px ui-sans-serif, system-ui, sans-serif; fill: #43484f; }
+  .frame      { stroke: #b6bcc6; stroke-width: 1; }
+  .tb-title   { font: 700 14px ui-sans-serif, system-ui, sans-serif; fill: #1b1f26; }
+  .tb-sub     { font: 10px ui-sans-serif, system-ui, sans-serif; fill: #6b7280; }
+  svg         { background: #fbfbfd; }
+</style>
+<rect width="728" height="506" fill="#fbfbfd"/>
+<g transform="translate(32.0,12.0)">
+<defs><pattern id="g28dbb6b" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10.0" cy="10.0" r="0.8" class="grid"/></pattern></defs><rect x="-32" y="-12" width="728" height="404" fill="url(#g28dbb6b)"/>
+<g class="wires">
+<polyline points="76.0,70.0 208.0,70.0 208.0,67.5" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="76.0,210.0 208.0,210.0 208.0,207.5" class="wire" stroke="#0a8f2c" stroke-width="1.6"/>
+<polyline points="289.3,70.0 289.3,222.5" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="272.0,75.0 289.3,75.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="208.0,222.5 289.3,222.5" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="388.0,70.0 289.3,70.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="289.3,82.5 289.3,215.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="272.0,215.0 289.3,215.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="208.0,82.5 289.3,82.5" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="388.0,210.0 289.3,210.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="442.0,70.0 488.0,70.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="442.0,210.0 488.0,210.0" class="wire" stroke="#9aa0a6" stroke-width="1.6"/>
+<polyline points="536.0,70.0 536.0,210.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="536.0,70.0 536.0,70.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="536.0,210.0 536.0,210.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="536.0,70.0 536.0,332.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<polyline points="536.0,332.0 612.0,332.0" class="wire" stroke="#1a1a1a" stroke-width="1.6"/>
+<circle cx="289.3" cy="75.0" r="2.6" class="junction"/>
+<circle cx="289.3" cy="210.0" r="2.6" class="junction"/>
+<circle cx="536.0" cy="210.0" r="2.6" class="junction"/>
+</g>
+<g class="net-labels">
+<text x="561.3" y="59.0" class="net-label">GND</text>
+<text x="461.3" y="65.0" class="net-label">LEDQ</text>
+<text x="461.3" y="205.0" class="net-label">LEDnQ</text>
+<text x="289.3" y="59.0" class="net-label">Q</text>
+<text x="289.3" y="71.5" class="net-label">nQ</text>
+<text x="131.4" y="203.8" class="net-label">nR</text>
+<text x="131.4" y="63.8" class="net-label">nS</text>
+</g>
+<g class="parts">
+<g class="part" data-ref="S" transform="translate(40.0,60.0)">
+<rect x="0" y="0" width="16.8" height="20.0" class="body"/>
+<text data-role="state" x="8.4" y="14.0" class="state-text">0</text>
+<line x1="16.8" y1="10.0" x2="24.0" y2="10.0" class="wire-only"/>
+<line x1="24.0" y1="10.0" x2="36.0" y2="10.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">S</text>
+<text x="8.4" y="14.0" class="state-text">1</text>
+</g>
+<g class="part" data-ref="R" transform="translate(40.0,200.0)">
+<rect x="0" y="0" width="16.8" height="20.0" class="body"/>
+<text data-role="state" x="8.4" y="14.0" class="state-text">0</text>
+<line x1="16.8" y1="10.0" x2="24.0" y2="10.0" class="wire-only"/>
+<line x1="24.0" y1="10.0" x2="36.0" y2="10.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">R</text>
+<text x="8.4" y="14.0" class="state-text">1</text>
+</g>
+<g class="part" data-ref="U1A" transform="translate(220.0,60.0)">
+<path d="M0,0 L25.0,0 A15.0,15.0 0 0 1 25.0,30.0 L0,30.0 Z" class="body"/>
+<circle cx="43.0" cy="15.0" r="3" class="wire-only"/>
+<line x1="0.0" y1="7.5" x2="-12.0" y2="7.5" class="wire-only"/>
+<line x1="0.0" y1="22.5" x2="-12.0" y2="22.5" class="wire-only"/>
+<line x1="40.0" y1="15.0" x2="52.0" y2="15.0" class="wire-only"/>
+<text x="20.0" y="-7" class="refdes">U1A</text>
+<text x="20.0" y="43.0" class="devname">74LS00</text>
+</g>
+<g class="part" data-ref="U1B" transform="translate(220.0,200.0)">
+<path d="M0,0 L25.0,0 A15.0,15.0 0 0 1 25.0,30.0 L0,30.0 Z" class="body"/>
+<circle cx="43.0" cy="15.0" r="3" class="wire-only"/>
+<line x1="0.0" y1="7.5" x2="-12.0" y2="7.5" class="wire-only"/>
+<line x1="0.0" y1="22.5" x2="-12.0" y2="22.5" class="wire-only"/>
+<line x1="40.0" y1="15.0" x2="52.0" y2="15.0" class="wire-only"/>
+<text x="20.0" y="-7" class="refdes">U1B</text>
+<text x="20.0" y="43.0" class="devname">74LS00</text>
+</g>
+<g class="part" data-ref="R1" transform="translate(400.0,60.0)">
+<path d="M0.0,10.0 L6.0,10.0 L7.5,5.0 L10.5,15.0 L13.5,5.0 L16.5,15.0 L19.5,5.0 L22.5,15.0 L24.0,10.0 L30.0,10.0" class="wire-only"/>
+<line x1="0.0" y1="10.0" x2="-12.0" y2="10.0" class="wire-only"/>
+<line x1="30.0" y1="10.0" x2="42.0" y2="10.0" class="wire-only"/>
+<text x="15.0" y="-7" class="refdes">R1</text>
+<text x="15.0" y="33.0" class="devname">R=330</text>
+</g>
+<g class="part" data-ref="R2" transform="translate(400.0,200.0)">
+<path d="M0.0,10.0 L6.0,10.0 L7.5,5.0 L10.5,15.0 L13.5,5.0 L16.5,15.0 L19.5,5.0 L22.5,15.0 L24.0,10.0 L30.0,10.0" class="wire-only"/>
+<line x1="0.0" y1="10.0" x2="-12.0" y2="10.0" class="wire-only"/>
+<line x1="30.0" y1="10.0" x2="42.0" y2="10.0" class="wire-only"/>
+<text x="15.0" y="-7" class="refdes">R2</text>
+<text x="15.0" y="33.0" class="devname">R=330</text>
+</g>
+<g class="part" data-ref="D1" transform="translate(500.0,60.0)">
+<line x1="0" y1="10.0" x2="12.0" y2="10.0" class="wire-only"/>
+<path d="M12.0,4.0 L22.0,10.0 L12.0,16.0 Z" class="body"/>
+<line x1="22.0" y1="4.0" x2="22.0" y2="16.0" class="wire-only"/>
+<line x1="22.0" y1="10.0" x2="24.0" y2="10.0" class="wire-only"/>
+<path d="M18.0,2.0 l5,-5 m-5,0 l0,3 m0,-3 l-3,0" class="emit"/>
+<path d="M22.0,5.0 l5,-5 m-5,0 l0,3 m0,-3 l-3,0" class="emit"/>
+<line x1="0.0" y1="10.0" x2="-12.0" y2="10.0" class="wire-only"/>
+<line x1="24.0" y1="10.0" x2="36.0" y2="10.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">D1</text>
+<text x="12.0" y="33.0" class="devname">COLOR=ROJO</text>
+</g>
+<g class="part" data-ref="D2" transform="translate(500.0,200.0)">
+<line x1="0" y1="10.0" x2="12.0" y2="10.0" class="wire-only"/>
+<path d="M12.0,4.0 L22.0,10.0 L12.0,16.0 Z" class="body"/>
+<line x1="22.0" y1="4.0" x2="22.0" y2="16.0" class="wire-only"/>
+<line x1="22.0" y1="10.0" x2="24.0" y2="10.0" class="wire-only"/>
+<path d="M18.0,2.0 l5,-5 m-5,0 l0,3 m0,-3 l-3,0" class="emit"/>
+<path d="M22.0,5.0 l5,-5 m-5,0 l0,3 m0,-3 l-3,0" class="emit"/>
+<line x1="0.0" y1="10.0" x2="-12.0" y2="10.0" class="wire-only"/>
+<line x1="24.0" y1="10.0" x2="36.0" y2="10.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">D2</text>
+<text x="12.0" y="33.0" class="devname">COLOR=VERDE</text>
+</g>
+<g class="part" data-ref="G1" transform="translate(600.0,300.0)">
+<line x1="12.0" y1="0" x2="12.0" y2="9.0" class="wire-only"/>
+<line x1="2.0" y1="9.0" x2="22.0" y2="9.0" class="wire-only"/>
+<line x1="6.0" y1="13.6" x2="18.0" y2="13.6" class="wire-only"/>
+<line x1="9.5" y1="18.0" x2="14.5" y2="18.0" class="wire-only"/>
+<line x1="12.0" y1="20.0" x2="12.0" y2="32.0" class="wire-only"/>
+<text x="12.0" y="-7" class="refdes">G1</text>
+</g>
+</g>
+</g>
+<g class="legend" transform="translate(20,414)">
+<line x1="0" y1="6" x2="26" y2="6" stroke="#1a1a1a" stroke-width="2.6"/>
+<text x="32" y="10" class="legend-text">0 — nivel bajo</text>
+<line x1="136" y1="6" x2="162" y2="6" stroke="#0a8f2c" stroke-width="2.6"/>
+<text x="168" y="10" class="legend-text">1 — nivel alto</text>
+<line x1="273" y1="6" x2="299" y2="6" stroke="#9aa0a6" stroke-width="2.6"/>
+<text x="305" y="10" class="legend-text">X — indeterminado</text>
+<line x1="426" y1="6" x2="452" y2="6" stroke="#2f6fb3" stroke-width="2.6"/>
+<text x="458" y="10" class="legend-text">Z — alta impedancia</text>
+<line x1="0" y1="21" x2="26" y2="21" stroke="#d21b1b" stroke-width="2.6"/>
+<text x="32" y="25" class="legend-text">colisión de bus</text>
+<text x="144" y="25" class="legend-text">simulado: t=0 s · 0 eventos</text>
+</g>
+<g class="titleblock"><line x1="14" y1="460" x2="714" y2="460" class="frame"/><text x="18" y="478" class="tb-title">Cerrojo SR con NANDs: memoria de un bit</text><text x="18" y="494" class="tb-sub">9 componentes · 7 redes · Voltio</text><text x="710" y="494" class="tb-sub" text-anchor="end">Voltio sr_latch</text></g>
+</svg>

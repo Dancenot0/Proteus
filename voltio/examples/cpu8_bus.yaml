@@ -1,0 +1,242 @@
+# Arquitectura de hardware: CPU de 8 bits con bus de datos compartido.
+#
+# Este es el ejemplo que justifica todo el diseño de Voltio. Un bus de datos
+# con varios dispositivos colgando es imposible de simular con lógica de dos
+# valores (0/1): hace falta el estado Z de alta impedancia para que un
+# dispositivo "suelte" el cable y otro pueda tomarlo, y hace falta X para
+# saber que un bus sin dueño no está "en cero" sino indefinido.
+#
+# Topología:
+#
+#                 ┌─────────┐
+#      ┌──────────┤  CPU8   ├──────────┐
+#      │  ADDR    │         │   DATA   │
+#      │  [0:15]  └─────────┘  [0:7]   │
+#      ▼                        ▲      ▼
+#  ┌───────┐              ┌─────┴──┐  ┌──────────┐   ┌──────────┐
+#  │ RAM   │◄────────────►│ 245    │  │  273     │   │  48 +    │
+#  │ 8K×8  │   A[0:12]    │ bus    │  │ latch    ├──►│  7seg    │
+#  └───────┘              │ tri-st │  └──────────┘   └──────────┘
+#                         └────────┘
+#      ▲                        ▲
+#      └── /WE, /OE ────────────┘ /E del 245: lo habilita la CPU solo cuando
+#                                  no está ella driveando el bus
+#
+# El detalle que hace que funcione: el 74LS245 está DESHABILITADO (/E en alta)
+# durante toda la simulación. Si se habilitara a la vez que la CPU escribe en
+# el bus, habría dos drivers push-pull peleando y el motor reportaría colisión.
+# En una placa real, eso quema algo.
+name: cpu8_bus
+title: "CPU de 8 bits con bus de datos compartido y puerto de salida"
+meta:
+  author: Voltio
+  description: >
+    Una CPU educativa de 8 bits ejecuta un programa corto: carga un valor en
+    el acumulador, lo saca por el puerto, carga otro y vuelve a sacarlo. El
+    puerto de salida es un registro 74LS273 que captura el bus en cada
+    escritura, y su contenido se muestra en un display de 7 segmentos a través
+    de un decodificador BCD.
+
+    La RAM de 8K×8 y el transceptor 74LS245 están conectados al mismo bus para
+    demostrar la topología, pero el 245 se mantiene deshabilitado: la CPU y la
+    RAM son los únicos que drivean, y nunca a la vez.
+
+    El programa está en la propiedad PROGRAM del CPU8 como bytes en
+    hexadecimal: "01 42 08 00 01 21 08 00 09" es LDA #0x42 / OUT 0 /
+    LDA #0x21 / OUT 0 / HLT.
+
+simulation:
+  timescale: 1us
+  duration: 40ms
+
+parts:
+  - ref: CLK1
+    part: CLOCK
+    at: [20, 60]
+    props:
+      FREQ: 500        # 500 Hz: lento para que se vea cada fase en la traza
+      DUTY: 50
+
+  - ref: U_CPU
+    part: CPU8
+    at: [180, 40]
+    label: CPU
+    props:
+      PROGRAM: "01 42 08 00 01 21 08 00 09"
+      ISA: SAP8
+
+  - ref: U_RAM
+    part: 6264
+    at: [180, 320]
+    label: RAM 8K×8
+
+  # Inversor para la lógica de decodificación: la RAM solo puede hablar cuando
+  # la CPU NO está escribiendo.
+  - ref: U_INV
+    part: 74LS04
+    at: [40, 220]
+    label: Decodificador de escritura
+
+  - ref: U_245
+    part: 74LS245
+    at: [460, 320]
+    label: Transceptor de bus
+
+  - ref: U_PORT
+    part: 74LS273
+    at: [460, 40]
+    label: Puerto de salida
+
+  - ref: U_DEC
+    part: 74LS48
+    at: [700, 40]
+    label: BCD → 7 seg
+
+  - ref: DISP1
+    part: 7SEG-CC
+    at: [880, 20]
+    props: {COLOR: ROJO}
+
+  - ref: GND1
+    part: GND
+    at: [920, 320]
+
+nets:
+  # ------------------------------------------------------------------------
+  # Reloj y reset
+  # ------------------------------------------------------------------------
+  # El reloj va SOLO a la CPU. El latch del puerto no se dispara con el reloj
+  # crudo sino con el strobe de escritura, y la razón es importante: si se
+  # disparara con el reloj, capturaría el bus en el mismo instante en que la
+  # CPU empieza a drivearlo, es decir, capturaría basura. Con el strobe, el
+  # flanco de captura llega cuando el dato ya está válido en el bus.
+  # Este es el error de temporización más típico al diseñar un puerto de
+  # salida, y es de los que un simulador detecta siempre y una placa solo a
+  # veces.
+  - name: CLK
+    connect: [CLK1.Q, U_CPU.CLK]
+  - name: RST
+    tie: 1                          # /RESET inactivo (es activo en baja)
+    connect: [U_CPU./RESET]
+
+  # ------------------------------------------------------------------------
+  # Bus de direcciones
+  # ------------------------------------------------------------------------
+  # La CPU saca 16 líneas pero la RAM solo tiene 13, y un bus exige que todos
+  # sus extremos aporten exactamente el mismo ancho. Así que el bus declarado
+  # es de 13 bits y toma ADDR[0:12]. Las tres líneas altas de la CPU quedan
+  # sin usar, que es legal: son salidas, y una salida sin conectar no rompe
+  # nada (lo que rompería sería una ENTRADA sin conectar, porque leería X).
+  - name: ABUS
+    bus: 13
+    connect: [U_CPU.ADDR[0:12], U_RAM.A[0:12]]
+
+  # El lado A del transceptor no participa en este diseño: se ata a tierra.
+  # (En un diseño completo lo alimentaría el decodificador de direcciones.)
+  - name: A245
+    bus: 8
+    tie: 0
+    connect: [U_245.A[0:7]]
+
+  # ------------------------------------------------------------------------
+  # Bus de datos: el corazón del diseño
+  # ------------------------------------------------------------------------
+  # CPU, RAM y puerto de salida comparten estos 8 cables. Los tres son
+  # tri-estado: solo drivea el que toca y los demás sueltan el bus dejándolo en
+  # Z. Si dos drivearan a la vez con niveles opuestos, el motor reportaría una
+  # colisión — que en una placa real significa humo.
+  - name: DBUS
+    bus: 8
+    connect: [U_CPU.DATA[0:7], U_RAM.D[0:7], U_PORT.D[0:7]]
+
+  # El lado B del 245 cuelga de su propio bus. Con /E en alta el transceptor
+  # está en alta impedancia y no interfiere con nadie.
+  - name: DBUS_B
+    bus: 8
+    connect: [U_245.B[0:7]]
+
+  # ------------------------------------------------------------------------
+  # Control de la RAM: decodificación de escritura
+  # ------------------------------------------------------------------------
+  # Esto es lo que evita la colisión de bus. Si /E de la RAM estuviera
+  # permanentemente a 0 (siempre habilitada), la RAM drivearía el bus de datos
+  # incluso mientras la CPU está escribiendo en él, y habría dos salidas
+  # empujando niveles opuestos al mismo cable. El motor lo detecta y lo reporta
+  # como colisión; en una placa real, eso quema la RAM o la CPU.
+  #
+  # La solución es un inversor: /E = NOT(/WR). Cuando la CPU escribe, /WR está
+  # bajo, así que /E queda alto y la RAM suelta el bus. Cuando la CPU no
+  # escribe, /WR está alto, /E queda bajo y la RAM sí puede responder.
+  #
+  # En un diseño completo esto iría en un 74LS138 que decodifique también el
+  # rango de direcciones, para que la RAM solo responda dentro de su ventana.
+  - name: WR_N
+    connect: [U_CPU./WR, U_INV.A0]
+  - name: RAM_RD
+    connect: [U_INV.Y, U_RAM./E]
+  - name: RAM_WR
+    tie: 1                          # /W inactivo: solo lectura
+    connect: [U_RAM./W]
+
+  # ------------------------------------------------------------------------
+  # Control del transceptor: DESHABILITADO
+  # ------------------------------------------------------------------------
+  # Poner /E a 0 con la CPU driveando el bus produciría una colisión, y el
+  # motor la reportaría en vez de dar un resultado inventado. Es exactamente el
+  # fallo que un bus tri-estado mal controlado provoca en la realidad.
+  - name: BUS_EN
+    tie: 1
+    connect: [U_245./E]
+  - name: BUS_DIR
+    tie: 0
+    connect: [U_245.DIR]
+
+  # ------------------------------------------------------------------------
+  # Puerto de salida
+  # ------------------------------------------------------------------------
+  - name: PORT_MR
+    tie: 1                          # /MR inactivo
+    connect: [U_PORT./MR]
+  # Strobe de captura. WSTROBE es un pulso de un ciclo completo: sube mientras
+  # la CPU drivea el dato y baja al ciclo siguiente, así que su flanco de
+  # subida llega con el dato ya estable en el bus. Usar /WR directamente
+  # también vale, pero WSTROBE existe precisamente para dejar la intención
+  # explícita en el esquemático.
+  - name: PORT_STROBE
+    connect: [U_CPU.WSTROBE, U_PORT.CP]
+
+  # El 273 captura el bus en cada flanco de reloj. Los bits 0-3 van también al
+  # decodificador BCD; como este solo acepta 4 bits y el bus PORT tendría 8,
+  # esos cuatro se declaran como redes sueltas en vez de como bus.
+  - name: PORT0
+    connect: [U_PORT.Q[0], U_DEC.A[0]]
+  - name: PORT1
+    connect: [U_PORT.Q[1], U_DEC.A[1]]
+  - name: PORT2
+    connect: [U_PORT.Q[2], U_DEC.A[2]]
+  - name: PORT3
+    connect: [U_PORT.Q[3], U_DEC.A[3]]
+  - name: PORT_HI
+    bus: 4
+    connect: [U_PORT.Q[4:7]]
+
+  # ------------------------------------------------------------------------
+  # Decodificador y display
+  # ------------------------------------------------------------------------
+  - name: DEC_CTRL
+    tie: 1                          # /LT, /RBI y /BI inactivos
+    connect: [U_DEC./LT, U_DEC./RBI, U_DEC./BI]
+  - name: SEG
+    bus: 7
+    connect: [U_DEC.a[0:6], DISP1.a[0:6]]
+
+  # ------------------------------------------------------------------------
+  # Alimentación
+  # ------------------------------------------------------------------------
+  # El símbolo GND1 más el nombre de red "GND" atan todo a nivel 0. Y
+  # DISP1.CC a tierra es además lo que le dice al modelo del display que es de
+  # cátodo común, o sea que sus segmentos encienden con nivel alto, que es lo
+  # que entrega el 74LS48. Si se pusiera un 74LS47 (activo bajo) con este
+  # display, el número saldría ilegible: el modelo lo detecta y lo muestra.
+  - name: GND
+    connect: [GND1.P, DISP1.CC, DISP1.dp]

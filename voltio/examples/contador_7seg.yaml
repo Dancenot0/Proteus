@@ -1,0 +1,100 @@
+# Contador binario de 4 bits (74LS193) con decodificador BCD a 7 segmentos
+# (74LS48) y display de cátodo común. Cuenta de 0 a 15 en bucle.
+#
+# Este es el ejemplo canónico de "electrónica digital": un reloj, un contador,
+# un decodificador y un indicador. Sirve de referencia para el DSL: muestra
+# pines vectoriales, buses, pines activos en baja y atados a riel.
+name: contador_7seg
+title: "Contador de 4 bits con display de 7 segmentos"
+meta:
+  author: Voltio
+  description: >
+    El 74LS193 cuenta hacia arriba con cada flanco del reloj. Sus cuatro
+    salidas Q entran al 74LS48, que las traduce a los siete segmentos del
+    display. Las entradas de control que no se usan quedan atadas al nivel
+    inactivo correspondiente.
+
+    Ojo con las polaridades: el 74LS48 tiene salidas activas en ALTA, que es
+    lo que pide un display de cátodo común. El 74LS47 es el gemelo con
+    salidas activas en BAJA y va con ánodo común; mezclarlos es el error más
+    clásico de esta familia de circuitos. El modelo de display de Voltio
+    detecta la polaridad mirando a qué nivel está el pin común, así que si te
+    equivocas lo verás en pantalla en vez de tener que adivinarlo.
+
+simulation:
+  timescale: 1us
+  duration: 20ms      # 20 ciclos de un reloj de 1 kHz
+
+parts:
+  - ref: CLK1
+    part: CLOCK
+    at: [30, 120]
+    props:
+      FREQ: 1000      # 1 kHz: se ve bien en la traza ASCII
+      DUTY: 50
+
+  - ref: U1
+    part: 74LS193
+    at: [200, 80]
+    label: Contador
+
+  - ref: U2
+    part: 74LS48
+    at: [420, 80]
+    label: Decodificador BCD
+
+  - ref: DISP1
+    part: 7SEG-CC
+    at: [620, 60]
+    props: {COLOR: ROJO}
+
+  - ref: GND1
+    part: GND
+    at: [660, 300]
+
+  - ref: VCC1
+    part: VCC
+    at: [120, 20]
+
+nets:
+  # -- reloj ---------------------------------------------------------------
+  - name: CLK
+    connect: [CLK1.Q, U1.CPU]
+
+  # -- bus de 4 bits entre contador y decodificador ------------------------
+  - name: Q
+    bus: 4
+    connect: [U1.Q[0:3], U2.A[0:3]]
+
+  # -- salidas del decodificador al display --------------------------------
+  # El 74LS48 usa `a` (activo alto); el 74LS47 usaría `/a` (activo bajo).
+  - name: SEG
+    bus: 7
+    connect: [U2.a[0:6], DISP1.a[0:6]]
+
+  # -- entradas del contador que no se usan --------------------------------
+  # /MR activo en baja → atado a 1 (deshabilita el reset)
+  # CPD alto → el contador solo cuenta hacia arriba
+  # /PL alto → deshabilita la carga paralela
+  - name: CTRL_CNT
+    tie: 1
+    connect: [U1./MR, U1.CPD, U1./PL]
+
+  # -- pines de datos de carga paralela, sin usar → a tierra ---------------
+  - name: P_BUS
+    bus: 4
+    tie: 0
+    connect: [U1.P[0:3]]
+
+  # -- entradas del decodificador que no se usan ---------------------------
+  # /LT, /RBI y /BI a nivel alto = modo normal de operación
+  - name: CTRL_DEC
+    tie: 1
+    connect: [U2./LT, U2./RBI, U2./BI]
+
+  # -- alimentación --------------------------------------------------------
+  # DISP1.CC a tierra es lo que le dice al modelo "soy de cátodo común".
+  - name: VCC
+    connect: [VCC1.P]
+  - name: GND
+    connect: [GND1.P, DISP1.CC, DISP1.dp]

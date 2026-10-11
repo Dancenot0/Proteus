@@ -1,0 +1,67 @@
+# Compuerta NAND con dos entradas manuales y un LED de salida.
+# El ejemplo más pequeño posible: sirve para comprobar que todo el pipeline
+# (DSL → grafo → simulación → render) funciona.
+#
+#   S1 ──┐
+#        ├──[74LS00]──┬── LED
+#   S2 ──┘             └── sonda
+name: compuerta_nand
+title: "NAND de 2 entradas con indicadores"
+meta:
+  author: Voltio
+  description: >
+    Dos interruptores alimentan una NAND. El LED enciende cuando la salida
+    es alta, es decir, siempre que NO estén ambos interruptores cerrados.
+
+simulation:
+  timescale: 1ns
+  duration: 1us
+
+parts:
+  - ref: S1
+    part: LOGICSTATE
+    at: [40, 60]
+    props: {STATE: "0"}
+
+  - ref: S2
+    part: LOGICSTATE
+    at: [40, 140]
+    props: {STATE: "0"}
+
+  - ref: U1
+    part: 74LS00
+    at: [200, 90]
+
+  - ref: R1
+    part: RES
+    at: [340, 90]
+    props: {R: 330}
+
+  - ref: D1
+    part: LED
+    at: [440, 90]
+    props: {COLOR: ROJO}
+
+  - ref: GND1
+    part: GND
+    at: [520, 160]
+
+  - ref: P1
+    part: PROBE
+    at: [340, 160]
+
+nets:
+  - name: A
+    connect: [S1.Q, U1.A0]
+
+  - name: B
+    connect: [S2.Q, U1.A1]
+
+  - name: Y
+    connect: [U1.Y, R1.1, P1.IN]
+
+  - name: LED_A
+    connect: [R1.2, D1.A]
+
+  - name: GND
+    connect: [D1.K, GND1.P]

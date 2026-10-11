@@ -1,0 +1,127 @@
+# RÉPLICA del proyecto Proteus "Compuertas NAND.PDF"
+#
+# Origen: esquemático exportado a PDF desde Proteus. Reconstruido por
+# ingeniería inversa del propio PDF: se extrajeron del flujo de contenido los
+# segmentos de cable, los puntos de unión, los cuerpos de las compuertas (por
+# sus curvas de Bézier y sus burbujas de inversión) y las posiciones de los
+# textos, y se reconstruyó la conectividad por geometría.
+#
+# Topología extraída (coordenadas del PDF entre corchetes):
+#
+#   S  [fuente 890,737]  ──┬─ U1A.A0
+#                         └─ U1A.A1            (U1:A como inversor)
+#   U1A.Y ──────────────── U1B.A0
+#   V  [fuente 890,940]  ─── U1B.A1
+#   U1B.Y ──────────────── U1D.A0
+#   R  [fuente 890,1144] ──┬─ U1C.A0
+#                         └─ U1C.A1            (U1:C como inversor)
+#   U1C.Y ──────────────── U2A.A0
+#   D  [fuente 890,1347] ─── U2A.A1
+#   U2A.Y ──────────────── U1D.A1
+#   U1D.Y ──┬──────────── U3A.A0
+#           └──────────── U3A.A1               (U3:A como inversor)
+#   U3A.Y ─── salida
+#
+# En el PDF original U1A..U1D son las cuatro puertas del MISMO físico 74LS00
+# (U1:A, U1:B, U1:C, U1:D) y U3:A es otro 74LS00. Aquí cada puerta es una
+# parte independiente porque así modela Voltio la familia 74xx; la
+# correspondencia es directa y la BOM lo agrupa igual.
+#
+# AVISO DE VERIFICACIÓN (comprobado con las 16 combinaciones de entrada):
+#
+#   cable            lógica REAL del cableado      rótulo que imprime el PDF
+#   --------------   ---------------------------   -------------------------
+#   salida de U1:B   (S'·V)'  =  S + V'            "S . V'"
+#   salida de U2:A   (R'+D)'  =  R · D'            "R + D'"
+#   salida de U1:D   (S'·V) + (R'+D)               "(S' . V) . (R' + D)"
+#   salida de U3:A   (S+V') · (R·D')               "(S . V') . (R + D')"
+#
+# El original aplica mal De Morgan de forma sistemática: ve una puerta con
+# burbuja y complementa cada operando sin invertir el operador. El caso más
+# claro es U1:D: una NAND cuyas dos entradas ya están complementadas hace la
+# SUMA de los términos directos (NAND(x', y') = x + y), no el producto.
+#
+# Consecuencia práctica: si los rótulos eran la especificación, el arreglo
+# mínimo es cambiar U1:D de 74LS00 a 74LS02 (NOR): NOR((S'V)', (R'+D)') =
+# (S'·V)·(R'+D), que es exactamente el rótulo impreso. La segunda etiqueta
+# ((S.V').(R+D') sobre U3:A) no se obtiene con ningún cambio de una puerta:
+# el complementario de (S'·V)·(R'+D) es (S+V')·(R·D'), no esa expresión.
+#
+# Esta réplica es fiel al CABLEADO, que es lo que se puede verificar contra
+# los bytes del PDF. Los tests (tests/test_replica_pdf.py) fijan ambas cosas:
+# la función real y el hecho de que los rótulos no coinciden.
+name: compuertas_nand_pdf
+title: "Réplica de 'Compuertas NAND.PDF' (Proteus)"
+meta:
+  author: "Voltio (réplica por ingeniería inversa del PDF)"
+  description: >
+    Cuatro entradas lógicas S, V, R, D; dos inversores (U1:A y U1:C), una NAND
+    (U1:B), una NOR (U2:A), una NAND (U1:D) y un inversor final (U3:A).
+    Reconstruido por geometría del PDF, no por sus rótulos.
+
+simulation:
+  timescale: 1us
+  duration: 1us
+
+parts:
+  # -- entradas: los cuatro LOGICSTATE del original, todos en 0 ------------
+  - {ref: S,  part: LOGICSTATE, at: [165, 184], props: {STATE: "0"}}
+  - {ref: V,  part: LOGICSTATE, at: [165, 235], props: {STATE: "0"}}
+  - {ref: R,  part: LOGICSTATE, at: [165, 286], props: {STATE: "0"}}
+  - {ref: D,  part: LOGICSTATE, at: [165, 337], props: {STATE: "0"}}
+
+  # -- U1: el 74LS00 de cuatro puertas -------------------------------------
+  - {ref: U1A, part: 74LS00, at: [273, 172], label: "U1:A"}
+  - {ref: U1B, part: 74LS00, at: [413, 197], label: "U1:B"}
+  - {ref: U1C, part: 74LS00, at: [260, 273], label: "U1:C"}
+  - {ref: U1D, part: 74LS00, at: [552, 248], label: "U1:D"}
+
+  # -- U2: el 74LS02 (NOR) --------------------------------------------------
+  - {ref: U2A, part: 74LS02, at: [400, 298], label: "U2:A"}
+
+  # -- U3: el segundo 74LS00 -------------------------------------------------
+  - {ref: U3A, part: 74LS00, at: [705, 248], label: "U3:A"}
+
+  # El original no lleva sondas ni instrumentos: las salidas quedan como
+  # cables etiquetados. (En la primera versión de esta réplica sí puse dos
+  # PROBE para ver el nivel en vivo, pero eso es una añaditura mía: no está en
+  # el PDF y ensuciaba la comparación visual.)
+
+nets:
+  # S alimenta las dos entradas de U1:A (inversor)
+  - name: S
+    connect: [S.Q, U1A.A0, U1A.A1]
+
+  # S' : salida del inversor, a la primera entrada de U1:B
+  - name: S_PRIMA
+    connect: [U1A.Y, U1B.A0]
+
+  - name: V
+    connect: [V.Q, U1B.A1]
+
+  # R alimenta las dos entradas de U1:C (inversor)
+  - name: R
+    connect: [R.Q, U1C.A0, U1C.A1]
+
+  # R' : salida del inversor, a la primera entrada de la NOR
+  - name: R_PRIMA
+    connect: [U1C.Y, U2A.A0]
+
+  - name: D
+    connect: [D.Q, U2A.A1]
+
+  # (S' . V)' : la NAND U1:B, a la primera entrada de U1:D
+  - name: NAND_B
+    connect: [U1B.Y, U1D.A0]
+
+  # (R' + D)' : la NOR U2:A, a la segunda entrada de U1:D
+  - name: NOR_A
+    connect: [U2A.Y, U1D.A1]
+
+  # Salida de U1:D: a la sonda y a las dos entradas de U3:A (inversor)
+  - name: SAL_U1D
+    connect: [U1D.Y, U3A.A0, U3A.A1]
+
+  # Salida final
+  - name: SALIDA
+    connect: [U3A.Y]

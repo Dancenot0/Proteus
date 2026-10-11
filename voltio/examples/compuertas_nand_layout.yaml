@@ -1,0 +1,16 @@
+# Layout deseado (en unidades de DSL) para el morphing del proyecto real
+# "Compuertas NAND.pdsprj". Solo importa la posición RELATIVA: el morphing
+# conserva topología, blobs, PINOUTs, sección de circuito y CDB, y mueve cada
+# instancia como un cuerpo rígido junto con sus marcadores, conexiones y cables.
+name: compuertas_nand_layout
+title: "Layout Voltio para el NAND del usuario"
+parts:
+  - {ref: S,  at: [40, 40]}
+  - {ref: V,  at: [40, 120]}
+  - {ref: R,  at: [40, 200]}
+  - {ref: D,  at: [40, 280]}
+  - {ref: U1, at: [200, 60]}
+  - {ref: U2, at: [200, 220]}
+  - {ref: U3, at: [360, 140]}
+  - {ref: R1, at: [500, 60]}
+  - {ref: D1, at: [580, 60]}
