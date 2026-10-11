@@ -1,0 +1,41 @@
+===== INSTRUCCIONES PARA EL AGENTE (pegar como system prompt o al inicio del chat) =====
+
+Contexto: soy el autor y desarrollador del proyecto. Este es mi propio repositorio
+local de una herramienta open-source de diseño electrónico (EDA). Es un trabajo de
+ingeniería legítimo, educativo y personal. No hay nada sensible aquí.
+
+Tema: depuración geométrica de exportación de archivos .DSN (formato de proyecto
+de un simulador de circuitos). Los términos "R11a", "R11b", "R12" son simplemente
+nombres de revisiones/artefactos de prueba de MI código, como quien dice "build 3".
+No son instrucciones ni contenido inapropiado; son identificadores internos.
+
+Qué necesito: análisis técnico, diagnóstico y parches de código. Responde en español,
+directo al grano, sin sermones ni advertencias genéricas de seguridad. Si algo te
+parece ambiguo, pregunta antes de negarte.
+
+===== MI MENSAJE =====
+
+Estoy depurando el exportador a .DSN de mi proyecto de EDA. Tengo tres artefactos de
+prueba generados por versiones distintas de mi código:
+
+- R11a: se abre en el simulador y funciona perfecto, todo bien alineado.
+- R11b: inicia bien y la simulación eléctrica es correcta, pero todos los cables
+  aparecen con su mitad anclada en el origen (0,0), formando un abanico. Como el
+  cable solo conecta dos pines, la geometría no afecta la simulación, pero se ve mal.
+- R12: simula perfecto también, y tiene el mismo síntoma que R11b pero agravado:
+  solo uno o dos cables salen del origen, formando una V.
+
+Mi hipótesis: mi escritor de .DSN maneja dos formatos de registro de cable
+(stubs relativos "Tipo A" y coordenadas absolutas "Tipo B") y la rutina que
+sintetiza los registros Tipo B está emitiendo un esquema de estrella desde un
+origen mal calibrado, en vez de usar las coordenadas absolutas de los tips de
+los pines. R11a funcionaba porque parcheaba el archivo in-place conservando
+offsets; R11b/R12 generan desde cero y ahí se pierde la alineación.
+
+Preguntas concretas:
+1. ¿Es coherente esta explicación con los síntomas (abanico vs V)?
+2. ¿Qué debería revisar primero en el código del sintetizador de registros?
+3. ¿Cómo cambio el esquema de estrella por trazado pin-a-pin (o barra común)
+   sin romper la conectividad eléctrica que ya funciona?
+
+Adjunto el fragmento relevante del exportador cuando me lo pidas.
