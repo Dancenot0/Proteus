@@ -67,6 +67,8 @@ from __future__ import annotations
 
 import io
 import os
+import stat
+import sys
 import time
 import zipfile
 from dataclasses import dataclass
@@ -77,10 +79,71 @@ from ..proteus.dsn import DSN_MAGIC, ProteusProject, open_project
 
 __all__ = ["save", "write_container", "Result", "STATUS"]
 
+#: Tamaño máximo de un archivo de firmware leído desde disco al exportar.
+#: Evita que una propiedad PROGRAM apunte a un archivo descomunal y agote la
+#: memoria del proceso (o llene el .pdsprj de basura).
+MAX_FIRMWARE_FILE_BYTES = 4 * 1024 * 1024
+
 STATUS = (
     "experimental: se genera el contenedor ZIP con PROJECT.XML y FIRMWARE.XML "
     "correctos, pero el ROOT.DSN binario todavía no lleva el circuito dibujado"
 )
+
+
+def _safe_firmware_source(program: str):
+    """Resuelve la propiedad ``PROGRAM`` sin abrir archivos fuera del proyecto.
+
+    Un DSL puede venir de una IA (o de un tercero), así que su contenido es
+    datos no confiables. Antes de leer cualquier ruta se comprueba que:
+
+    * sea una ruta **relativa** —nada absoluto, ni ``C:\\``, ni ``~``—;
+    * siga dentro del directorio actual tras resolver ``..`` y enlaces
+      simbólicos (candidato a fuga de archivos si se exporta el proyecto);
+    * sea un archivo ordinario (nunca FIFOs, dispositivos o sockets);
+    * pese menos de :data:`MAX_FIRMWARE_FILE_BYTES`.
+
+    Si el texto no es una ruta existente válida se devuelve ``None`` y el
+    llamante lo trata como código pegado en línea, que es el comportamiento
+    original para valores como ``"01 42 08 00"``. Cualquier lectura rechazada
+    se avisa por stderr para que el usuario sepa por qué su firmware no entró.
+    """
+    if not program or os.path.isabs(program) or program.startswith("~"):
+        return None
+    base = os.path.realpath(".")
+    candidate = os.path.realpath(os.path.join(base, program))
+    if candidate != base and not candidate.startswith(base + os.sep):
+        sys.stderr.write(
+            f"[proteus] PROGRAM={program!r} apunta fuera del directorio del "
+            "proyecto; se trata como código en línea, no se lee ningún archivo\n"
+        )
+        return None
+    try:
+        st = os.stat(candidate)
+    except OSError:
+        return None
+    if not stat.S_ISREG(st.st_mode):
+        sys.stderr.write(
+            f"[proteus] PROGRAM={program!r} no es un archivo regular; se omite\n"
+        )
+        return None
+    if st.st_size > MAX_FIRMWARE_FILE_BYTES:
+        sys.stderr.write(
+            f"[proteus] PROGRAM={program!r} pesa {st.st_size:,} bytes "
+            f"(máximo {MAX_FIRMWARE_FILE_BYTES:,}); se omite\n"
+        )
+        return None
+    with open(candidate, "r", encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def _xml_safe(s: str) -> str:
+    """Deja en ``s`` solo caracteres válidos como nombre/valor XML sin escapar.
+
+    Los nombres de dispositivo (``ATMEGA328P``) y las referencias (``U1``)
+    legítimos son alfanuméricos; todo lo demás se colapsa a ``_``, de modo que
+    un DSL malicioso no puede cerrar una etiqueta ni inyectar atributos.
+    """
+    return re.sub(r"[^A-Za-z0-9_.-]", "_", s) or "_"
 
 
 @dataclass
@@ -121,12 +184,15 @@ def _firmware_xml(circuit: Circuit) -> tuple:
         program = str(part.props.get("PROGRAM", "") or "")
         if not program:
             continue
-        dev = spec.name.upper()
+        # dev y ref vienen del DSL (datos no confiables) y se interpolan en
+        # XML: se sanitizan para que no puedan romper la sintaxis ni inyectar
+        # etiquetas. Los nombres reales son alfanuméricos, así que la
+        # sanitización es inocua en la práctica.
+        dev = _xml_safe(spec.name.upper())
+        ref_s = _xml_safe(ref)
         folder = f"FIRMWARE/{dev}"
-        if os.path.exists(program):
-            with open(program, "r", encoding="utf-8", errors="replace") as f:
-                src = f.read()
-        else:
+        src = _safe_firmware_source(program)
+        if src is None:
             src = program  # se permite pegar el código directamente en la propiedad
         fname = f"{folder}/main.asm"
         entries[fname] = src
@@ -135,10 +201,10 @@ def _firmware_xml(circuit: Circuit) -> tuple:
             f"<{dev}>\n"
             f" <SOURCE>{os.path.basename(fname)}</SOURCE>\n"
             f" <CODEGEN>AVRASM2</CODEGEN>\n"
-            f" <DEVICE>{ref}</DEVICE>\n"
+            f" <DEVICE>{ref_s}</DEVICE>\n"
             f"</{dev}>\n"
         )
-        controllers.append((dev, ref, f"{folder}.XML"))
+        controllers.append((dev, ref_s, f"{folder}.XML"))
 
     if not controllers:
         return (
