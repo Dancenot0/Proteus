@@ -167,20 +167,30 @@ def main(argv):
             body += mk
 
     # ---- cables sintetizados ----------------------------------------------
+    # Primero se calculan TODOS los tips de patilla del circuito (extremos
+    # posibles de cualquier ruta). Ningún tramo puede nacer fuera de ellos.
+    def tip_de(ep):
+        if ep.part not in INST:
+            return None
+        fam, _ = INST[ep.part]
+        pin = PINMAP.get(ep.pin, ep.pin)
+        off = PIN_OFF.get((fam, pin))
+        if off is None:
+            return None
+        cx, cy = lay[ep.part]
+        wx, wy = T(cx, cy)
+        return (wx + off[0], wy + off[1])
+
+    all_tips = []
+    for net in circuit.nets.values():
+        for ep in net.endpoints:
+            q = tip_de(ep)
+            if q is not None and q not in all_tips:
+                all_tips.append(q)
+
     nw = 0
     for net in circuit.nets.values():
-        pts = []
-        for ep in net.endpoints:
-            if ep.part not in INST:
-                continue
-            fam, _ = INST[ep.part]
-            pin = PINMAP.get(ep.pin, ep.pin)
-            off = PIN_OFF.get((fam, pin))
-            if off is None:
-                continue
-            cx, cy = lay[ep.part]
-            wx, wy = T(cx, cy)
-            pts.append((wx + off[0], wy + off[1]))
+        pts = [q for q in (tip_de(ep) for ep in net.endpoints) if q is not None]
         if len(pts) < 2:
             continue
         def emite(ruta):
@@ -195,22 +205,59 @@ def main(argv):
             nw += 1
             return body2
 
+        # --- R13: la ruta del cable SIEMPRE arranca en el tip del pin ----------
+        # Lección de R11b/R12 (abanico/V al origen): si el primer punto de un
+        # registro WIRE no coincide con la punta de una patilla, ISIS dibuja el
+        # tramo "volado" hacia el calibrado y la red queda huérfana. Regla de
+        # oro heredada de R11a (in-place, impecable): cada segmento empieza y
+        # termina en un tip, y dos cables que comparten un nodo comparten el
+        # punto EXACTO (los registros @76955/@77480 del NAND real lo prueban).
+        def emite_pegado(ruta):
+            """Emite la ruta y, si ningún extremo cae sobre un tip conocido,
+            añade un stub (extremo-duplicado, como los del proyecto bueno) que
+            lo ata a ese pin. Así ningún cable nace en el aire."""
+            tips = {tuple(q) for q in all_tips}
+            if ruta[0] not in tips and ruta[-1] in tips:
+                ruta = list(reversed(ruta))
+            body_ = emite(ruta)
+            if ruta[0] not in tips:
+                anchor = next((q for q in all_tips
+                               if q[0] == ruta[0][0] or q[1] == ruta[0][1]), None)
+                if anchor is not None:
+                    mid = ((anchor[0], ruta[0][1]) if anchor[1] != ruta[0][1]
+                           else (ruta[0][0], anchor[1]))
+                    body_ += emite([anchor, mid, ruta[0]])
+                    ruta = [anchor] + list(ruta[1:])
+            return body_
+
         if len(pts) == 2 and (pts[0][0] == pts[1][0] or pts[0][1] == pts[1][1]):
-            body += emite(pts)
+            body += emite_pegado(pts)
         elif len(pts) == 2:
-            body += emite([pts[0], (pts[1][0], pts[0][1]), pts[1]])
+            # L genuina: el codo va en (x_del_extremo_2, y_del_extremo_1); el
+            # otro vértice posible dejaría un tramo despegado del tip.
+            body += emite_pegado([pts[0], (pts[1][0], pts[0][1]), pts[1]])
         else:
-            # Tres o más extremos: peine ortogonal. Un cable en L por extremo
-            # más una espina vertical que los une. En ISIS los cables que se
-            # tocan en un punto se conectan solos, así que el peine es
-            # eléctricamente un solo nodo, y visualmente es el abanico de
-            # siempre: un renglón por cable, sin diagonales.
-            xs = [p[0] for p in pts]
-            ys = [p[1] for p in pts]
-            jx = min(xs) - 254000
+            # Tres o más extremos: barra común Y, calculada entre los tips
+            # (nunca fuera del haz, nunca en el origen calibrado). Un tramo en
+            # L por extremo que muere pegado a su pin; los tramos que ya son
+            # colineales con la barra se emiten rectos. Las uniones comparten
+            # el punto exacto => un solo nodo eléctrico.
+            xs = sorted(p[0] for p in pts)
+            ys = sorted(p[1] for p in pts)
+            bx = xs[len(xs) // 2]
+            by = ys[len(ys) // 2]
+            used_x = any(p[0] == bx for p in pts)
+            used_y = any(p[1] == by for p in pts)
+            if used_x and used_y:      # la cruz caería sobre un pin: mover la barra
+                bx = xs[-1] if xs[-1] != bx else xs[0]
+                by = ys[-1] if ys[-1] != by else ys[0]
             for (px, py) in pts:
-                body += emite([(px, py), (jx, py)])
-            body += emite([(jx, min(ys)), (jx, max(ys))])
+                if px == bx:           # ya colineal vertical con la barra
+                    body += emite([(px, py), (bx, by)])
+                elif py == by:         # ya colineal horizontal con la barra
+                    body += emite([(px, py), (bx, by)])
+                else:                  # L: tip -> codo en x de la barra -> junction
+                    body += emite([(px, py), (bx, py), (bx, by)])
 
     # ---- PINOUTs de la plantilla ------------------------------------------
     for fam in ("74LS00",):
